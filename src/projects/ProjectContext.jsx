@@ -43,40 +43,59 @@ const projectData = [
   },
 ];
 
+function calculateProgress(project) {
+  const total = project.tasks.length;
+  const completed = project.tasks.filter((t) => t.completed).length;
+  return total > 0 ? (completed / total) * 100 : 0;
+}
+
 const ProjectContext = createContext();
 
 function ProjectProvider({ children }) {
-  const [projects, setProjects] = useState(projectData);
+  const [projects, setProjects] = useState(
+    projectData.map((project) => ({
+      ...project,
+      progress: calculateProgress(project),
+    }))
+  );
 
   function addTask(projectId, newTask) {
     setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        project.id === projectId
-          ? { ...project, tasks: [...project.tasks, newTask] }
-          : project
-      )
+      prevProjects.map((project) => {
+        if (project.id === projectId) {
+          const updatedTasks = [...project.tasks, newTask];
+          return {
+            ...project,
+            tasks: updatedTasks,
+            progress: calculateProgress({ ...project, tasks: updatedTasks }),
+          };
+        }
+        return project;
+      })
     );
   }
 
   function toggleTask(projectId, taskId) {
     setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        project.id === projectId
-          ? {
-              ...project,
-              tasks: project.tasks.map((task) =>
-                task.id === taskId
-                  ? { ...task, completed: !task.completed }
-                  : task
-              ),
-            }
-          : project
-      )
+      prevProjects.map((project) => {
+        if (project.id === projectId) {
+          const updatedTasks = project.tasks.map((task) =>
+            task.id === taskId ? { ...task, completed: !task.completed } : task
+          );
+          return {
+            ...project,
+            tasks: updatedTasks,
+            progress: calculateProgress({ ...project, tasks: updatedTasks }),
+          };
+        }
+        return project;
+      })
     );
   }
 
   function addNewProject(newProject) {
     setProjects((prevProjects) => [newProject, ...prevProjects]);
+    console.log(newProject.tasks);
   }
 
   return (

@@ -20,6 +20,7 @@ function CreateNewProject() {
       time: "0h0m",
       tasks: [],
       notes: "",
+      progress: 0,
     };
     addNewProject(newProject);
     setProjectName("");

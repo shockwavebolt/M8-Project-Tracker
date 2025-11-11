@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useProject } from "../projects/ProjectContext";
 import BackButton from "../UI/BackButton";
 import TasksInput from "../projects/TasksInput";
+import ProjectStatus from "../UI/ProjectStatus";
 
 const TextArea = styled.div`
   height: 200px;
@@ -34,14 +35,15 @@ function ProjectOverview() {
             <div className="flex flex-col w-full gap-8">
               <Header>{project.name}</Header>
               <div className="flex justify-between items-center text-[18px] font-(family-name:--font-01) ">
-                <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
+                <ProjectStatus status={project.status} />
+                {/* <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
                   <FaCircle className="w-4 h-4  translate-y-[0.05em]" />
                   <div>{project.status}</div>
-                </div>
+                </div> */}
                 <div className="flex gap-2 items-center text-[#769FB6]">
-                  80%{" "}
+                  {Math.round(project.progress)}%
                   <span>
-                    <ProgressionBar />
+                    <ProgressionBar progress={project.progress} />
                   </span>
                 </div>
                 <div className="flex gap-2 items-center text-white">

@@ -1,8 +1,8 @@
-import { FaCircle } from "react-icons/fa";
 import { HiDotsVertical } from "react-icons/hi";
 import styled from "styled-components";
 import ProgressionBar from "../UI/ProgressionBar";
 import { BsStopwatch } from "react-icons/bs";
+import ProjectStatus from "../UI/ProjectStatus";
 
 const Wrapper = styled.li`
   display: flex;
@@ -33,10 +33,11 @@ const ProjectInfo = styled.div`
 
 const ProjectStats = styled.div`
   display: flex;
+  justify-content: space-between;
+
   max-width: 450px;
   align-items: baseline;
-  gap: 24px;
-  align-self: stretch;
+  flex-grow: 1;
 `;
 
 function ProjectItem({ item }) {
@@ -53,15 +54,17 @@ function ProjectItem({ item }) {
         </ProjectInfo>
         <ProjectStats>
           <div className="flex items-center gap-8 ">
-            <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
+            <ProjectStatus status={item.status} />
+
+            {/* <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
               <FaCircle className="w-4 h-4  translate-y-[0.05em]" />
               <div>{item.status}</div>
-            </div>
+            </div> */}
 
             <div className="flex gap-2 items-center text-[#769FB6]">
-              80%{" "}
+              {Math.round(item.progress)}%
               <span>
-                <ProgressionBar />
+                <ProgressionBar progress={item.progress} />
               </span>
             </div>
 
