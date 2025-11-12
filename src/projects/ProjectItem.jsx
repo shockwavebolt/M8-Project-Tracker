@@ -3,6 +3,9 @@ import styled from "styled-components";
 import ProgressionBar from "../UI/ProgressionBar";
 import { BsStopwatch } from "react-icons/bs";
 import ProjectStatus from "../UI/ProjectStatus";
+import { useState } from "react";
+import StyledDotMenu from "../UI/dotMenu";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.li`
   display: flex;
@@ -28,7 +31,7 @@ const ProjectInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 16px;
+  gap: 8px;
 `;
 
 const ProjectStats = styled.div`
@@ -41,42 +44,74 @@ const ProjectStats = styled.div`
 `;
 
 function ProjectItem({ item }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function toggleMenu() {
+    setMenuOpen(!menuOpen);
+  }
+
   return (
     <Wrapper>
       <InnerWrapper>
-        <ProjectInfo>
-          <div className=" text-[#1e1e1e]  text-[18px] font-(family-name:--font-01)">
-            {item.name}
-          </div>
-          <div className="text-[#474747] text-[16px] font-(family-name:--font-02)">
-            {item.description}
-          </div>
-        </ProjectInfo>
-        <ProjectStats>
-          <div className="flex items-center gap-8 ">
-            <ProjectStatus status={item.status} />
+        <Link
+          className="flex w-full justify-between"
+          key={item.id}
+          to={`/projects/${item.id}`}
+        >
+          <ProjectInfo>
+            <div className=" text-[#1e1e1e]  text-[18px] font-(family-name:--font-01)">
+              {item.name}
+            </div>
+            <div className="text-[#474747] text-[16px] font-(family-name:--font-02)">
+              {item.description}
+            </div>
+          </ProjectInfo>
 
-            {/* <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
+          <ProjectStats>
+            <div className="flex items-center gap-8 ">
+              <ProjectStatus status={item.status} />
+
+              {/* <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
               <FaCircle className="w-4 h-4  translate-y-[0.05em]" />
               <div>{item.status}</div>
             </div> */}
 
-            <div className="flex gap-2 items-center text-[#769FB6]">
-              {Math.round(item.progress)}%
-              <span>
-                <ProgressionBar progress={item.progress} />
-              </span>
-            </div>
+              <div className="flex gap-2 items-center text-[#769FB6]">
+                {Math.round(item.progress)}%
+                <span>
+                  <ProgressionBar progress={item.progress} />
+                </span>
+              </div>
 
-            <div className="flex gap-2 items-center text-[#474747]">
-              <span>
-                <BsStopwatch />
-              </span>
-              12h 45m
+              <div className="flex gap-2 items-center text-[#474747]">
+                <span>
+                  <BsStopwatch />
+                </span>
+                12h 45m
+              </div>
             </div>
-          </div>
-          <HiDotsVertical />
-        </ProjectStats>
+          </ProjectStats>
+        </Link>
+
+        <div className="relative">
+          <button
+            className="cursor-pointer z-20"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleMenu();
+            }}
+          >
+            <HiDotsVertical />
+          </button>
+
+          {menuOpen && (
+            <StyledDotMenu>
+              <div>Archive</div>
+              <div>Delete</div>
+            </StyledDotMenu>
+          )}
+        </div>
       </InnerWrapper>
     </Wrapper>
   );

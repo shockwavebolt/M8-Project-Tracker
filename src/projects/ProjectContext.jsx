@@ -98,9 +98,44 @@ function ProjectProvider({ children }) {
     console.log(newProject.tasks);
   }
 
+  function deleteTask(projectId, taskId) {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === projectId
+          ? {
+              ...project,
+              tasks: project.tasks.filter((task) => task.id !== taskId),
+            }
+          : project
+      )
+    );
+  }
+
+  function editTask(projectId, taskId, newTitle) {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === projectId
+          ? {
+              ...project,
+              tasks: project.tasks.map((task) =>
+                task.id === taskId ? { ...task, title: newTitle } : task
+              ),
+            }
+          : project
+      )
+    );
+  }
+
   return (
     <ProjectContext.Provider
-      value={{ projects, addTask, toggleTask, addNewProject }}
+      value={{
+        projects,
+        addTask,
+        toggleTask,
+        addNewProject,
+        deleteTask,
+        editTask,
+      }}
     >
       {children}
     </ProjectContext.Provider>

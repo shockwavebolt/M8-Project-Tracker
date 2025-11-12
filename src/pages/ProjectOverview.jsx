@@ -2,7 +2,6 @@ import { HiDotsVertical } from "react-icons/hi";
 import styled from "styled-components";
 import Task from "../UI/Task";
 import Header from "../UI/Header";
-import { FaCircle } from "react-icons/fa";
 import ProgressionBar from "../UI/ProgressionBar";
 import { BsStopwatch } from "react-icons/bs";
 import { useParams } from "react-router-dom";
@@ -77,9 +76,7 @@ function ProjectOverview() {
                 .slice()
                 .sort((a, b) => a.completed - b.completed)
                 .map((task) => (
-                  <Task key={task.id} projectId={project.id} task={task}>
-                    {task.title}
-                  </Task>
+                  <Task key={task.id} projectId={project.id} task={task} />
                 ))}
 
               <TasksInput projectId={project.id} />
