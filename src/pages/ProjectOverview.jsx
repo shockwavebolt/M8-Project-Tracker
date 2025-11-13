@@ -34,7 +34,11 @@ function ProjectOverview() {
             <div className="flex flex-col w-full gap-8">
               <Header>{project.name}</Header>
               <div className="flex justify-between items-center text-[18px] font-(family-name:--font-01) ">
-                <ProjectStatus status={project.status} />
+                <ProjectStatus
+                  projectId={project.id}
+                  status={project.status}
+                  progress={project.progress}
+                />
                 {/* <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
                   <FaCircle className="w-4 h-4  translate-y-[0.05em]" />
                   <div>{project.status}</div>

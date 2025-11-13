@@ -59,6 +59,11 @@ function ProjectProvider({ children }) {
     }))
   );
 
+  function addNewProject(newProject) {
+    setProjects((prevProjects) => [newProject, ...prevProjects]);
+    console.log(newProject.tasks);
+  }
+
   function addTask(projectId, newTask) {
     setProjects((prevProjects) =>
       prevProjects.map((project) => {
@@ -93,11 +98,6 @@ function ProjectProvider({ children }) {
     );
   }
 
-  function addNewProject(newProject) {
-    setProjects((prevProjects) => [newProject, ...prevProjects]);
-    console.log(newProject.tasks);
-  }
-
   function deleteTask(projectId, taskId) {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
@@ -126,6 +126,14 @@ function ProjectProvider({ children }) {
     );
   }
 
+  function updateStatus(projectId, newStatus) {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === projectId ? { ...project, status: newStatus } : project
+      )
+    );
+  }
+
   return (
     <ProjectContext.Provider
       value={{
@@ -135,6 +143,7 @@ function ProjectProvider({ children }) {
         addNewProject,
         deleteTask,
         editTask,
+        updateStatus,
       }}
     >
       {children}
