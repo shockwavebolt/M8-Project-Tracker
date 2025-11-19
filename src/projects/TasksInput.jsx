@@ -22,6 +22,9 @@ function TasksInput({ projectId }) {
       id: Date.now(),
       title: task,
       completed: false,
+      isRunning: false,
+      lastStart: null,
+      elapsed: 0,
     };
     addTask(projectId, newTask);
     setTask(" ");

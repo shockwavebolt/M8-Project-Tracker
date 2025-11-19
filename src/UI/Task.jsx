@@ -4,7 +4,7 @@ import { RxBox, RxPause, RxPlay } from "react-icons/rx";
 import { TfiCheckBox } from "react-icons/tfi";
 import styled, { css } from "styled-components";
 import { useProject } from "../projects/ProjectContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StyledDotMenu from "./dotMenu";
 
 const variations = {
@@ -40,12 +40,30 @@ const EditInput = styled.input`
   }
 `;
 
-function Task({ time, projectId, task }) {
-  const { toggleTask, deleteTask, editTask } = useProject();
+function formatTime(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${hours}h ${minutes}m ${seconds}s`;
+}
+
+function Task({ projectId, task }) {
+  const {
+    toggleTask,
+    deleteTask,
+    editTask,
+    startTaskTimer,
+    pauseTaskTimer,
+    resetTaskTimer,
+  } = useProject();
 
   const [menuOpen, setOpenMenu] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(task.title);
+  const [runTime, setRunTime] = useState(false);
+  const [displayTime, setDisplayTime] = useState(task.elapsed);
 
   function handleClick() {
     toggleTask(projectId, task.id);
@@ -68,6 +86,20 @@ function Task({ time, projectId, task }) {
     setOpenMenu(!menuOpen);
   }
 
+  function toggleRunTime() {
+    if (runTime) {
+      pauseTaskTimer(projectId, task.id);
+    } else {
+      startTaskTimer(projectId, task.id);
+    }
+
+    setRunTime(!runTime);
+  }
+
+  useEffect(() => {
+    setDisplayTime(task.elapsed);
+  }, [task.elapsed]);
+
   return (
     <TaskWrapper variation={task.completed ? "completed" : "incomplete"}>
       <div
@@ -82,7 +114,7 @@ function Task({ time, projectId, task }) {
               value={editedText}
               onChange={(e) => setEditedText(e.target.value)}
               onBlur={handleSave}
-              onKeyDown={(e) => e.key === "Enter" && handleSave}
+              onKeyDown={(e) => e.key === "Enter" && handleSave()}
             ></EditInput>
           ) : (
             <div
@@ -92,21 +124,22 @@ function Task({ time, projectId, task }) {
             </div>
           )}
         </div>
-
-        <div className="flex gap-6 items-baseline">
-          <div className="flex w-[175px] justify-center items-center gap-2">
-            <div>
-              {" "}
-              {time === "play" ? (
-                <RxPlay />
-              ) : time === "pause" ? (
-                <RxPause />
-              ) : (
+      </div>
+      <div className="flex gap-6 items-baseline">
+        <div className="flex w-[175px] justify-center items-center gap-2">
+          <div>
+            {!task.completed ? (
+              <button className="cursor-pointer" onClick={toggleRunTime}>
+                {runTime ? <RxPause /> : <RxPlay />}
+              </button>
+            ) : (
+              <div>
+                {" "}
                 <BsStopwatch />
-              )}
-            </div>
-            <div>45m</div>
+              </div>
+            )}
           </div>
+          <div>{formatTime(displayTime)}</div>
         </div>
       </div>
 
@@ -124,7 +157,12 @@ function Task({ time, projectId, task }) {
 
         {menuOpen && (
           <StyledDotMenu>
-            <div>Reset</div>
+            <div
+              className="cursor-pointer"
+              onClick={() => resetTaskTimer(projectId, task.id)}
+            >
+              Reset
+            </div>
             <div className="cursor-pointer" onClick={handleEdit}>
               Edit
             </div>

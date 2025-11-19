@@ -1,5 +1,6 @@
 import { HiHome } from "react-icons/hi";
 import { HiArchiveBox, HiCog6Tooth } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const NavLayout = styled.div`
@@ -17,12 +18,19 @@ const StyledNavLink = styled.div`
 `;
 
 function MainNav() {
+  const navigate = useNavigate();
   return (
     <NavLayout>
-      <StyledNavLink>
+      <StyledNavLink
+        className="cursor-pointer"
+        onClick={() => navigate("/home")}
+      >
         <HiHome />
       </StyledNavLink>
-      <StyledNavLink>
+      <StyledNavLink
+        className="cursor-pointer"
+        onClick={() => navigate("/archive")}
+      >
         <HiArchiveBox />
       </StyledNavLink>
       <StyledNavLink>

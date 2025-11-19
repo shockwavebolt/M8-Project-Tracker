@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const projectData = [
   {
@@ -8,9 +8,30 @@ const projectData = [
     status: "Active",
     time: "12h45m",
     tasks: [
-      { id: 111, title: "Finish footer", completed: false },
-      { id: 112, title: "Design mid and large screens", completed: false },
-      { id: 113, title: "Wireframe", completed: true },
+      {
+        id: 111,
+        title: "Finish footer",
+        completed: false,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
+      {
+        id: 112,
+        title: "Design mid and large screens",
+        completed: false,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
+      {
+        id: 113,
+        title: "Wireframe",
+        completed: true,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
     ],
     notes: "Might need to explore different color palettes in the future",
   },
@@ -21,9 +42,30 @@ const projectData = [
     status: "Paused",
     time: "9h10m",
     tasks: [
-      { id: 121, title: "Product grid layout", completed: true },
-      { id: 122, title: "Implement size filter", completed: false },
-      { id: 123, title: "Responsive hero section", completed: false },
+      {
+        id: 121,
+        title: "Product grid layout",
+        completed: true,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
+      {
+        id: 122,
+        title: "Implement size filter",
+        completed: false,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
+      {
+        id: 123,
+        title: "Responsive hero section",
+        completed: false,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
     ],
     notes: "Client requested a more editorial aesthetic for the hero section",
   },
@@ -35,9 +77,30 @@ const projectData = [
     status: "Active",
     time: "16h30m",
     tasks: [
-      { id: 131, title: "Homepage redesign", completed: true },
-      { id: 132, title: "Testimonials carousel", completed: false },
-      { id: 133, title: "Mobile optimization", completed: false },
+      {
+        id: 131,
+        title: "Homepage redesign",
+        completed: true,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
+      {
+        id: 132,
+        title: "Testimonials carousel",
+        completed: false,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
+      {
+        id: 133,
+        title: "Mobile optimization",
+        completed: false,
+        isRunning: false,
+        lastStart: null,
+        elapsed: 0,
+      },
     ],
     notes: "Consider integrating a booking feature in later stages",
   },
@@ -134,6 +197,87 @@ function ProjectProvider({ children }) {
     );
   }
 
+  function startTaskTimer(projectId, taskId) {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        projectId === project.id
+          ? {
+              ...project,
+              tasks: project.tasks.map((task) =>
+                taskId === task.id
+                  ? { ...task, isRunning: true, lastStart: Date.now() }
+                  : task
+              ),
+            }
+          : project
+      )
+    );
+  }
+
+  function pauseTaskTimer(projectId, taskId) {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        projectId === project.id
+          ? {
+              ...project,
+              tasks: project.tasks.map((task) =>
+                taskId === task.id
+                  ? {
+                      ...task,
+                      isRunning: false,
+                      elapsed: task.elapsed + (Date.now() - task.lastStart),
+                      lastStart: null,
+                    }
+                  : task
+              ),
+            }
+          : project
+      )
+    );
+  }
+
+  function resetTaskTimer(projectId, taskId) {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        projectId === project.id
+          ? {
+              ...project,
+              tasks: project.tasks.map((task) =>
+                taskId === task.id
+                  ? { ...task, isRunning: false, lastStart: null, elapsed: 0 }
+                  : task
+              ),
+            }
+          : project
+      )
+    );
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProjects((prev) =>
+        prev.map((project) => ({
+          ...project,
+          tasks: project.tasks.map((t) => {
+            if (t.isRunning && t.lastStart) {
+              const now = Date.now();
+              const diff = now - t.lastStart;
+
+              return {
+                ...t,
+                elapsed: (t.elapsed || 0) + diff, // <--- SAFEGUARD
+                lastStart: now,
+              };
+            }
+            return t;
+          }),
+        }))
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <ProjectContext.Provider
       value={{
@@ -144,6 +288,9 @@ function ProjectProvider({ children }) {
         deleteTask,
         editTask,
         updateStatus,
+        startTaskTimer,
+        pauseTaskTimer,
+        resetTaskTimer,
       }}
     >
       {children}
