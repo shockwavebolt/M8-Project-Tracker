@@ -4,8 +4,8 @@ const Container = styled.div`
   padding: 1px;
   width: 100px;
   height: 32px;
-  border: 1.5px solid;
-  border-color: #c2c2c2;
+  border: 1px solid;
+  border-color: #474747;
   border-radius: 9999px;
   overflow: hidden;
 `;
@@ -14,7 +14,7 @@ const Bar = styled.div`
   height: 100%;
 
   border-radius: 9999px;
-  background-color: #769fb6;
+  background-color: #00a6fb;
   transition: all;
   transition-duration: 300ms;
 `;

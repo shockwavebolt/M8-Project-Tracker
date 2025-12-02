@@ -4,7 +4,7 @@ import { RxBox, RxPause, RxPlay } from "react-icons/rx";
 import { TfiCheckBox } from "react-icons/tfi";
 import styled, { css } from "styled-components";
 import { useProject } from "../projects/ProjectContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StyledDotMenu from "./dotMenu";
 
 const variations = {
@@ -64,6 +64,7 @@ function Task({ projectId, task }) {
   const [editedText, setEditedText] = useState(task.title);
   const [runTime, setRunTime] = useState(false);
   const [displayTime, setDisplayTime] = useState(task.elapsed);
+  const menuRef = useRef(null);
 
   function handleClick() {
     toggleTask(projectId, task.id);
@@ -99,6 +100,20 @@ function Task({ projectId, task }) {
   useEffect(() => {
     setDisplayTime(task.elapsed);
   }, [task.elapsed]);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpenMenu(false);
+      }
+    }
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
 
   return (
     <TaskWrapper variation={task.completed ? "completed" : "incomplete"}>
@@ -156,7 +171,7 @@ function Task({ projectId, task }) {
         </button>
 
         {menuOpen && (
-          <StyledDotMenu>
+          <StyledDotMenu ref={menuRef}>
             <div
               className="cursor-pointer"
               onClick={() => resetTaskTimer(projectId, task.id)}

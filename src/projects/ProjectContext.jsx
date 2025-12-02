@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const projectData = [
   {
@@ -6,7 +7,6 @@ const projectData = [
     name: " Hearth&Bean",
     description: "Coffee shop web design",
     status: "Active",
-    time: "12h45m",
     tasks: [
       {
         id: 111,
@@ -40,7 +40,6 @@ const projectData = [
     name: "LunaWear",
     description: "E-commerce fashion landing page",
     status: "Paused",
-    time: "9h10m",
     tasks: [
       {
         id: 121,
@@ -75,7 +74,6 @@ const projectData = [
     name: "NovaFit",
     description: "Personal trainer portfolio site",
     status: "Active",
-    time: "16h30m",
     tasks: [
       {
         id: 131,
@@ -124,7 +122,14 @@ function ProjectProvider({ children }) {
 
   function addNewProject(newProject) {
     setProjects((prevProjects) => [newProject, ...prevProjects]);
-    console.log(newProject.tasks);
+    toast.success("New Project Added");
+  }
+
+  function deleteProject(projectId) {
+    setProjects((prevProjects) =>
+      prevProjects.filter((project) => projectId != project.id)
+    );
+    toast.success("Project successfully deleted");
   }
 
   function addTask(projectId, newTask) {
@@ -141,6 +146,7 @@ function ProjectProvider({ children }) {
         return project;
       })
     );
+    toast.success("New Task Added");
   }
 
   function toggleTask(projectId, taskId) {
@@ -172,6 +178,7 @@ function ProjectProvider({ children }) {
           : project
       )
     );
+    toast.success("Task successfully deleted");
   }
 
   function editTask(projectId, taskId, newTitle) {
@@ -195,6 +202,15 @@ function ProjectProvider({ children }) {
         project.id === projectId ? { ...project, status: newStatus } : project
       )
     );
+  }
+
+  function formatTime(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return `${hours}h ${minutes}m ${seconds}s`;
   }
 
   function startTaskTimer(projectId, taskId) {
@@ -278,6 +294,18 @@ function ProjectProvider({ children }) {
     return () => clearInterval(interval);
   }, []);
 
+  function getProjectElapsed(project) {
+    return project.tasks.reduce((sum, task) => sum + task.elapsed, 0);
+  }
+
+  function updateNotes(projectId, newNote) {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === projectId ? { ...project, notes: newNote } : project
+      )
+    );
+  }
+
   return (
     <ProjectContext.Provider
       value={{
@@ -285,12 +313,16 @@ function ProjectProvider({ children }) {
         addTask,
         toggleTask,
         addNewProject,
+        deleteProject,
         deleteTask,
         editTask,
         updateStatus,
         startTaskTimer,
         pauseTaskTimer,
         resetTaskTimer,
+        getProjectElapsed,
+        formatTime,
+        updateNotes,
       }}
     >
       {children}

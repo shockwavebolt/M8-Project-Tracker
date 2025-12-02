@@ -55,11 +55,11 @@ function ProjectStatus({ projectId, status, progress }) {
     <div
       className={`relative flex p-3 gap-2 justify-center items-center  whitespace-nowrap   ${
         curStatus === "Active"
-          ? "text-[#B3E493]"
+          ? "text-[#618B25]"
           : curStatus === "Paused"
-          ? "text-[#ECA72C]"
+          ? "text-[#FF7F11]"
           : curStatus === "Completed"
-          ? "text-[#769fb6]"
+          ? "text-[#00A6FB]"
           : "text-[#adadad]"
       }`}
     >
@@ -82,11 +82,11 @@ function ProjectStatus({ projectId, status, progress }) {
       {menuOpen && (
         <StatusMenu>
           <FaCircle
-            className="w-4 h-4 text-[#B3E493] cursor-pointer"
+            className="w-4 h-4 text-[#618B25] cursor-pointer"
             onClick={() => handleSelection("Active")}
           ></FaCircle>
           <FaCircle
-            className="w-4 h-4 text-[#ECA72C] cursor-pointer"
+            className="w-4 h-4 text-[#FF7F11] cursor-pointer"
             onClick={() => handleSelection("Paused")}
           ></FaCircle>
         </StatusMenu>

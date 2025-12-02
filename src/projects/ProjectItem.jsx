@@ -3,9 +3,10 @@ import styled from "styled-components";
 import ProgressionBar from "../UI/ProgressionBar";
 import { BsStopwatch } from "react-icons/bs";
 import ProjectStatus from "../UI/ProjectStatus";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StyledDotMenu from "../UI/dotMenu";
 import { Link } from "react-router-dom";
+import { useProject } from "./ProjectContext";
 
 const Wrapper = styled.li`
   display: flex;
@@ -45,10 +46,26 @@ const ProjectStats = styled.div`
 
 function ProjectItem({ item }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { getProjectElapsed, formatTime, deleteProject } = useProject();
+  const menuRef = useRef();
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
   }
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    }
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
 
   return (
     <Wrapper>
@@ -87,7 +104,7 @@ function ProjectItem({ item }) {
                 <span>
                   <BsStopwatch />
                 </span>
-                12h 45m
+                {formatTime(getProjectElapsed(item))}
               </div>
             </div>
           </ProjectStats>
@@ -106,9 +123,14 @@ function ProjectItem({ item }) {
           </button>
 
           {menuOpen && (
-            <StyledDotMenu>
+            <StyledDotMenu ref={menuRef}>
               <div>Archive</div>
-              <div>Delete</div>
+              <div
+                className="cursor-pointer"
+                onClick={() => deleteProject(item.id)}
+              >
+                Delete
+              </div>
             </StyledDotMenu>
           )}
         </div>
