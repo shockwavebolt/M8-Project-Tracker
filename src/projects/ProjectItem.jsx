@@ -1,8 +1,6 @@
 import { HiDotsVertical } from "react-icons/hi";
 import styled from "styled-components";
-import ProgressionBar from "../UI/ProgressionBar";
-import { BsStopwatch } from "react-icons/bs";
-import ProjectStatus from "../UI/ProjectStatus";
+import ProjectStats from "../UI/ProjectStats";
 import { useEffect, useRef, useState } from "react";
 import StyledDotMenu from "../UI/dotMenu";
 import { Link } from "react-router-dom";
@@ -29,24 +27,15 @@ const InnerWrapper = styled.div`
 
 const ProjectInfo = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
   gap: 8px;
-`;
-
-const ProjectStats = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  max-width: 450px;
-  align-items: baseline;
-  flex-grow: 1;
 `;
 
 function ProjectItem({ item }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { getProjectElapsed, formatTime, deleteProject } = useProject();
+  const { deleteProject } = useProject();
   const menuRef = useRef();
 
   function toggleMenu() {
@@ -76,38 +65,20 @@ function ProjectItem({ item }) {
           to={`/projects/${item.id}`}
         >
           <ProjectInfo>
-            <div className=" text-[#1e1e1e]  text-[18px] font-(family-name:--font-01)">
-              {item.name}
+            <div className=" text-[#1e1e1e] text-[16px]  md:text-[18px] font-(family-name:--font-01)">
+              <span>{item.name}</span>
             </div>
-            <div className="text-[#474747] text-[16px] font-(family-name:--font-02)">
+            <div className=" hidden md:block  text-[#474747] text-[12px] md:text-[16px]  font-(family-name:--font-02)">
               {item.description}
             </div>
+            <span className="block md:hidden">
+              <ProjectStats item={item} />
+            </span>
           </ProjectInfo>
 
-          <ProjectStats>
-            <div className="flex items-center gap-8 ">
-              <ProjectStatus status={item.status} />
-
-              {/* <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
-              <FaCircle className="w-4 h-4  translate-y-[0.05em]" />
-              <div>{item.status}</div>
-            </div> */}
-
-              <div className="flex gap-2 items-center text-[#769FB6]">
-                {Math.round(item.progress)}%
-                <span>
-                  <ProgressionBar progress={item.progress} />
-                </span>
-              </div>
-
-              <div className="flex gap-2 items-center text-[#474747]">
-                <span>
-                  <BsStopwatch />
-                </span>
-                {formatTime(getProjectElapsed(item))}
-              </div>
-            </div>
-          </ProjectStats>
+          <span className="hidden md:block">
+            <ProjectStats item={item} />
+          </span>
         </Link>
 
         <div className="relative">

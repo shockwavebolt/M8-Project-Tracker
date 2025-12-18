@@ -7,10 +7,16 @@ import { Outlet } from "react-router-dom";
 
 const StyledAppLayout = styled.div`
   display: grid;
-  grid-template-columns: 161px 1fr;
+  grid-template-columns: 100px 1fr;
   height: 100vh;
   background-color: #1e1e1e;
   padding: 24px;
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 4px;
+  }
 `;
 
 const Main = styled.div`
@@ -19,6 +25,11 @@ const Main = styled.div`
   border-radius: 32px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
   overflow: auto;
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    padding: 24px 4px;
+    border-radius: 12px;
+  }
 `;
 
 const Container = styled.div`

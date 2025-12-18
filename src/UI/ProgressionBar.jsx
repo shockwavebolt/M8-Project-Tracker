@@ -8,6 +8,11 @@ const Container = styled.div`
   border-color: #474747;
   border-radius: 9999px;
   overflow: hidden;
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    width: 60px;
+    height: 20px;
+  }
 `;
 
 const Bar = styled.div`

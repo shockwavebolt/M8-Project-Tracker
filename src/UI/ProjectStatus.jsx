@@ -53,7 +53,7 @@ function ProjectStatus({ projectId, status, progress }) {
 
   return (
     <div
-      className={`relative flex p-3 gap-2 justify-center items-center  whitespace-nowrap   ${
+      className={`relative flex md:p-3 gap-2 justify-center items-center  whitespace-nowrap   ${
         curStatus === "Active"
           ? "text-[#618B25]"
           : curStatus === "Paused"
@@ -64,14 +64,14 @@ function ProjectStatus({ projectId, status, progress }) {
       }`}
     >
       {curStatus === "Not Started" ? (
-        <FaRegCircle className="w-4 h-4  translate-y-[0.05em]" />
+        <FaRegCircle className="w-3 h-3 md:w-4 md:h-4 translate-y-[0.05em]" />
       ) : (
-        <FaCircle className="w-4 h-4  translate-y-[0.05em]" />
+        <FaCircle className="w-3 h-3 md:w-4 md:h-4  translate-y-[0.05em]" />
       )}
 
       <div
         onClick={toggleMenu}
-        className={`cursor-pointer ${
+        className={`cursor-pointer text-[12px] md:text-[16px] ${
           curStatus === "Completed" || curStatus === "Not Started"
             ? "pointer-events-none"
             : ""

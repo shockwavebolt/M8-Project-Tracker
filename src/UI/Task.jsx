@@ -133,7 +133,9 @@ function Task({ projectId, task }) {
             ></EditInput>
           ) : (
             <div
-              className={`text-[16px] ${task.completed ? "line-through" : ""}`}
+              className={`text-[12px] md:text-[16px] ${
+                task.completed ? "line-through" : ""
+              }`}
             >
               {task.title}
             </div>
@@ -141,7 +143,7 @@ function Task({ projectId, task }) {
         </div>
       </div>
       <div className="flex gap-6 items-baseline">
-        <div className="flex w-[175px] justify-center items-center gap-2">
+        <div className="flex  justify-center items-center gap-2">
           <div>
             {!task.completed ? (
               <button className="cursor-pointer" onClick={toggleRunTime}>
@@ -154,7 +156,9 @@ function Task({ projectId, task }) {
               </div>
             )}
           </div>
-          <div>{formatTime(displayTime)}</div>
+          <div className="text-[12px] md:text-[16px] whitespace-nowrap mr-2 md:mr-4">
+            {formatTime(displayTime)}
+          </div>
         </div>
       </div>
 

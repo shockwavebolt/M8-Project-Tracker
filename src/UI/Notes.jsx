@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Button from "./Button";
 import { useState } from "react";
 import { useProject } from "../projects/ProjectContext";
 
@@ -12,9 +11,16 @@ const TextArea = styled.textarea`
   border: 3px solid #474747;
   background: #474747;
   color: white;
+  font-size: 16px;
 
   &:focus {
     outline: none;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    font-size: 12px;
+    height: 150px;
+    padding: 8px;
   }
 `;
 

@@ -36,34 +36,36 @@ function CreateNewProject() {
   }
 
   return (
-    <div className="flex gap-10">
-      <BackButton />
-      <div className="flex flex-col  gap-12 self-stretch w-[600px]">
+    <div className="flex px-2 md:gap-10">
+      <span className="hidden md:block">
+        <BackButton />
+      </span>
+      <div className="flex flex-col gap-8 md:gap-12 self-stretch w-[600px]">
         <Header>Create New Project</Header>
         <div className="flex flex-col gap-6 p-3 border-t-2 border-[#474747] ">
           <div className="flex flex-col gap-2">
-            <div className=" text-white  text-[18px] font-(family-name:--font-01) ">
+            <div className=" text-white text-[16px] md:text-[18px] font-(family-name:--font-01) ">
               Project Name
             </div>
             <input
-              className="w-full"
+              className="w-full h-10 text-[12px] md:text-[16px]"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
             ></input>
           </div>
 
           <div className="flex flex-col gap-2">
-            <div className=" text-white  text-[18px] font-(family-name:--font-01) ">
+            <div className=" text-white text-[16px]  md:text-[18px] font-(family-name:--font-01) ">
               Description
             </div>
             <input
-              className="w-full"
+              className="w-full h-10 text-[12px] md:text-[16px]"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></input>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex gap-2 md:gap-6">
             <Button variation="tertiary" onClick={handleCancel}>
               Cancel
             </Button>

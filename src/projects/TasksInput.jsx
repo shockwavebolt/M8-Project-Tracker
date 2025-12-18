@@ -41,16 +41,28 @@ function TasksInput({ projectId }) {
       ) : (
         <div className="flex gap-2 w-full ">
           <input
-            className="grow"
+            className="grow h-10 text-[12px] md:text-[16px]"
             value={task}
             onChange={(e) => setTask(e.target.value)}
           />
-          <Button variation="tertiary" onClick={handleCancelClick}>
-            Cancel
-          </Button>
-          <Button variation="primary" onClick={handleSubmit}>
-            Add Task
-          </Button>
+          <span className=" hidden md:flex gap-2">
+            <Button variation="tertiary" onClick={handleCancelClick}>
+              Cancel
+            </Button>
+            <Button variation="primary" onClick={handleSubmit}>
+              Add Task
+            </Button>
+          </span>
+
+          {/* Mobile version */}
+          <span className=" flex  md:hidden gap-1">
+            <Button variation="tertiary_2" onClick={handleCancelClick}>
+              &#x2715;
+            </Button>
+            <Button variation="primary_2" onClick={handleSubmit}>
+              <HiPlus />
+            </Button>
+          </span>
         </div>
       )}
     </>

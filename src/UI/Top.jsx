@@ -12,21 +12,29 @@ function Top({ children }) {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-6">
       <Header>{children}</Header>
-      <div className="flex justify-between items-center self-stretch">
-        <div className="flex items-center gap-4">
-          <input></input>
-          <Button variation="secondary">
-            <HiBarsArrowDown />
+      <div className="flex justify-between gap-1  items-center self-stretch">
+        <div className="flex items-center gap-1 md:gap-4">
+          <input className="h-10 text-[12px] md:text-[16px]"></input>
+          <Button variation="primary_2" className="relative">
+            <HiBarsArrowDown className="absolute" />
           </Button>
         </div>
-        <Button variation="primary" onClick={handleCreateProject}>
-          <HiPlus />
-          <span>New project</span>
-        </Button>
+        <span className="hidden md:block">
+          <Button variation="primary" onClick={handleCreateProject}>
+            <HiPlus />
+            <span>New project</span>
+          </Button>
+        </span>
+        {/* Mobile */}
+        <span className="block md:hidden">
+          <Button variation="primary_2" onClick={handleCreateProject}>
+            <HiPlus />
+          </Button>
+        </span>
       </div>
-    </>
+    </div>
   );
 }
 

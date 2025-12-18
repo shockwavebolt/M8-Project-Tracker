@@ -1,4 +1,3 @@
-import { HiDotsVertical } from "react-icons/hi";
 import Task from "../UI/Task";
 import Header from "../UI/Header";
 import ProgressionBar from "../UI/ProgressionBar";
@@ -16,12 +15,16 @@ function ProjectOverview() {
   const project = projects.find((p) => p.id === Number(id));
   return (
     <>
-      <div className="flex gap-10 ">
-        <BackButton />
-        <div className="flex flex-col items-start self-stretch w-full  gap-10">
+      <div className="flex md:gap-10 ">
+        <span className="hidden md:block">
+          <BackButton />
+        </span>
+
+        <div className="flex flex-col px-2 sm:px-0 items-start self-stretch w-full  gap-10">
           <div className="flex justify-between w-full items-stretch ">
             <div className="flex flex-col w-full gap-8">
               <Header>{project.name}</Header>
+
               <div className="flex justify-between items-center text-[18px] font-(family-name:--font-01) ">
                 <ProjectStatus
                   projectId={project.id}
@@ -29,36 +32,40 @@ function ProjectOverview() {
                   progress={project.progress}
                 />
 
-                <div className="flex gap-2 items-center text-[#00A6FB]">
-                  {Math.round(project.progress)}%
+                <div className="flex gap-1 md:gap-2 items-center text-[#00A6FB] ">
+                  <span className="text-[12px] md:text-[16px]">
+                    {Math.round(project.progress)}%
+                  </span>
                   <span>
                     <ProgressionBar progress={project.progress} />
                   </span>
                 </div>
-                <div className="flex gap-2 items-center text-white">
+                <div className="flex gap-1 md:gap-2 items-center text-white">
                   <span>
                     <BsStopwatch />
                   </span>
-                  {formatTime(getProjectElapsed(project))}
+                  <span className="text-[12px] md:text-[16px]">
+                    {formatTime(getProjectElapsed(project))}
+                  </span>
                 </div>
               </div>
             </div>
-            <HiDotsVertical className="text-white w-8 h-8" />
+            {/* <HiDotsVertical className="text-white w-8 h-8" /> */}
           </div>
 
           {/* DESCRIPTION */}
           <div className=" flex flex-col self-stretch  gap-2 p-3 border-t-2 border-[#474747] ">
-            <div className=" text-white  text-[18px] font-(family-name:--font-01) ">
+            <div className=" text-white text-[16px] md:text-[18px] font-(family-name:--font-01) ">
               Description :
             </div>
-            <div className=" text-[#e6e6e6] text-[16px] font-(family-name:--font-02)">
+            <div className=" text-[#e6e6e6] text-[12px] md:text-[16px] font-(family-name:--font-02)">
               {project.description}
             </div>
           </div>
 
           {/* TASKS */}
           <div className="flex flex-col items-start self-stretch gap-2 p-3 border-t-2 border-[#474747]">
-            <div className="font-(family-name:--font-01) text-white text-[18px]">
+            <div className="font-(family-name:--font-01) text-white text-[16px] md:text-[18px]">
               Tasks :
             </div>
             <ul className="flex flex-col items-start self-stretch gap-4 ">
@@ -74,7 +81,7 @@ function ProjectOverview() {
           </div>
 
           <div className="flex flex-col items-start gap-2 self-stretch p-3 border-t-2 border-[#474747]">
-            <div className="font-(--font-01) text-white text-[18px]">
+            <div className="font-(--font-01) text-white text-[16px] md:text-[18px]">
               Notes :
             </div>
 

@@ -10,18 +10,35 @@ const variations = {
     border-radius: 32px;
     font-size: 16px;
     background: #474747;
+    @media screen and (min-width: 320px) and (max-width: 768px) {
+      font-size: 12px;
+      padding: 16px 20px;
+    }
   `,
+
+  primary_2: css`
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    background: #474747;
+  `,
+
   secondary: css`
     display: flex;
-    height: 40px;
+    height: 32px;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
-    border-radius: 64px;
-    font-size: 20px;
-    padding-left: 2px;
+    border-radius: 9999px;
     background: #474747;
+
+    @media screen and (min-width: 320px) and (max-width: 768px) {
+      padding: 16px;
+    }
   `,
 
   tertiary: css`
@@ -32,6 +49,23 @@ const variations = {
     gap: 4px;
     border-radius: 32px;
     font-size: 16px;
+    border-color: #474747;
+    border-width: 2px;
+    border-style: solid;
+    @media screen and (min-width: 320px) and (max-width: 768px) {
+      font-size: 12px;
+      padding: 16px 20px;
+    }
+  `,
+
+  tertiary_2: css`
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
     border-color: #474747;
     border-width: 2px;
     border-style: solid;

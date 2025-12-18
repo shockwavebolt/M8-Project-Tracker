@@ -7,6 +7,10 @@ const Header = styled.h1`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 export default Header;
