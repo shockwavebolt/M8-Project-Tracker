@@ -16,6 +16,9 @@ const StatusMenu = styled.div`
   border: 1px solid #474747;
   background: #1e1e1e;
   box-shadow: 0 5px 7px 4px rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    padding: 12px;
+  }
 `;
 
 function ProjectStatus({ projectId, status, progress }) {
@@ -82,11 +85,11 @@ function ProjectStatus({ projectId, status, progress }) {
       {menuOpen && (
         <StatusMenu>
           <FaCircle
-            className="w-4 h-4 text-[#618B25] cursor-pointer"
+            className="w-3 h-3 md:w-4 md:h-4 text-[#618B25] cursor-pointer"
             onClick={() => handleSelection("Active")}
           ></FaCircle>
           <FaCircle
-            className="w-4 h-4 text-[#FF7F11] cursor-pointer"
+            className="w-3 h-3 md:w-4 md:h-4 text-[#FF7F11] cursor-pointer"
             onClick={() => handleSelection("Paused")}
           ></FaCircle>
         </StatusMenu>

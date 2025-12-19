@@ -15,6 +15,12 @@ const StyledDotMenu = styled.div`
   box-shadow: 0 5px 7px 4px rgba(0, 0, 0, 0.25);
   font-family: var(--font-02);
   font-size: 16px;
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    left: -30px;
+    padding: 12px;
+    gap: 12px;
+    font-size: 12px;
+  }
 `;
 
 export default StyledDotMenu;

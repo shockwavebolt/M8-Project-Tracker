@@ -10,7 +10,7 @@ const StyledAppLayout = styled.div`
   grid-template-columns: 100px 1fr;
   height: 100vh;
   background-color: #1e1e1e;
-  padding: 24px;
+  padding: 12px;
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
     display: flex;
@@ -20,6 +20,7 @@ const StyledAppLayout = styled.div`
 `;
 
 const Main = styled.div`
+  height: 100%;
   padding: 64px 64px;
   background-color: #333333;
   border-radius: 32px;

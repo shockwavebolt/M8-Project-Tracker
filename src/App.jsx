@@ -37,9 +37,10 @@ function App() {
               duration: 5000,
             },
             style: {
-              fontSize: "16px",
-              maxWidth: "500px",
-              padding: "16px 24px",
+              fontSize: "1rem",
+              maxWidth: "90vw",
+              width: "fit-content",
+              padding: "1rem 1.5rem",
               backgroundColor: "#474747",
               color: "white",
             },
