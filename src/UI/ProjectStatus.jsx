@@ -36,7 +36,12 @@ function ProjectStatus({ projectId, status, progress }) {
     } else if (progress === 0 && status !== "Not Started") {
       setCurStatus("Not Started");
       updateStatus(projectId, "Not Started");
-    } else if (progress > 0 && progress < 100 && status !== "Active") {
+    } else if (
+      progress > 0 &&
+      progress < 100 &&
+      status !== "Active" &&
+      status != "Archived"
+    ) {
       updateStatus(projectId, "Active");
     }
   }, [progress, projectId, status, updateStatus]);
@@ -63,7 +68,7 @@ function ProjectStatus({ projectId, status, progress }) {
           ? "text-[#FF7F11]"
           : curStatus === "Completed"
           ? "text-[#00A6FB]"
-          : "text-[#adadad]"
+          : "text-[#474747]"
       }`}
     >
       {curStatus === "Not Started" ? (

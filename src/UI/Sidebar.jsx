@@ -21,7 +21,8 @@ function Sidebar() {
 
   return (
     <StyledSidebar>
-      {/* <Logo /> */}
+      {/* The logo placement should be replaced by the back button on mobile */}
+      <Logo />
       <MainNav />
     </StyledSidebar>
   );

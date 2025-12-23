@@ -24,10 +24,14 @@ function ProjectStats({ item }) {
               <div>{item.status}</div>
             </div> */}
 
-        <div className="flex gap-2 items-center text-[#769FB6]">
+        <div
+          className={`flex gap-2 items-center ${
+            item.status != "Archived" ? "text-[#00a6fb]" : "text-[#474747]"
+          }`}
+        >
           <span className="hidden md:block">{Math.round(item.progress)}%</span>
           <span>
-            <ProgressionBar progress={item.progress} />
+            <ProgressionBar progress={item.progress} status={item.status} />
           </span>
         </div>
 

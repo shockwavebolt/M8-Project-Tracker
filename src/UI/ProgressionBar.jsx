@@ -19,15 +19,19 @@ const Bar = styled.div`
   height: 100%;
 
   border-radius: 9999px;
-  background-color: #00a6fb;
   transition: all;
   transition-duration: 300ms;
 `;
 
-function ProgressionBar({ progress }) {
+function ProgressionBar({ progress, status }) {
   return (
     <Container>
-      <Bar style={{ width: `${progress}%` }} />
+      <Bar
+        style={{
+          width: `${progress}%`,
+          backgroundColor: `${status != "Archived" ? "#00a6fb" : "#474747"}`,
+        }}
+      />
     </Container>
   );
 }

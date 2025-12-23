@@ -33,9 +33,9 @@ const ProjectInfo = styled.div`
   gap: 8px;
 `;
 
-function ProjectItem({ item }) {
+function ProjectItem({ item, linkUrl }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { deleteProject } = useProject();
+  const { deleteProject, updateStatus } = useProject();
   const menuRef = useRef();
 
   function toggleMenu() {
@@ -62,7 +62,7 @@ function ProjectItem({ item }) {
         <Link
           className="flex w-full justify-between"
           key={item.id}
-          to={`/projects/${item.id}`}
+          to={`/${linkUrl}/${item.id}`}
         >
           <ProjectInfo>
             <div className=" text-[#1e1e1e] text-[16px]  md:text-[18px] font-(family-name:--font-01)">
@@ -95,7 +95,12 @@ function ProjectItem({ item }) {
 
           {menuOpen && (
             <StyledDotMenu ref={menuRef}>
-              <div>Archive</div>
+              <div
+                className="cursor-pointer"
+                onClick={() => updateStatus(item.id, "Archived")}
+              >
+                Archive
+              </div>
               <div
                 className="cursor-pointer"
                 onClick={() => deleteProject(item.id)}

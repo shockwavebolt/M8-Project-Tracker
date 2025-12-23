@@ -32,12 +32,21 @@ function ProjectOverview() {
                   progress={project.progress}
                 />
 
-                <div className="flex gap-1 md:gap-2 items-center text-[#00A6FB] ">
+                <div
+                  className={`flex gap-1 md:gap-2 items-center ${
+                    project.status != "Archived"
+                      ? "text-[#00A6FB]"
+                      : "text-[#474747]"
+                  }`}
+                >
                   <span className="text-[12px] md:text-[16px]">
                     {Math.round(project.progress)}%
                   </span>
                   <span>
-                    <ProgressionBar progress={project.progress} />
+                    <ProgressionBar
+                      progress={project.progress}
+                      status={project.status}
+                    />
                   </span>
                 </div>
                 <div className="flex gap-1 md:gap-2 items-center text-white">

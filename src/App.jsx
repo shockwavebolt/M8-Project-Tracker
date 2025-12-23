@@ -20,6 +20,7 @@ function App() {
               <Route path="create-project" element={<CreateNewProject />} />
               <Route path="home" element={<Home />} />
               <Route path="archive" element={<Archive />} />
+              <Route path="/archive/:id" element={<ProjectOverview />} />
               <Route path="/projects/:id" element={<ProjectOverview />} />
             </Route>
           </Routes>

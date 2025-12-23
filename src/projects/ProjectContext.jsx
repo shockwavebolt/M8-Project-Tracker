@@ -39,7 +39,7 @@ const projectData = [
     id: 12,
     name: "LunaWear",
     description: "E-commerce fashion landing page",
-    status: "Paused",
+    status: "Archived",
     tasks: [
       {
         id: 121,
@@ -202,6 +202,9 @@ function ProjectProvider({ children }) {
         project.id === projectId ? { ...project, status: newStatus } : project
       )
     );
+    newStatus === "Archived"
+      ? toast.success("Project successfully Archived")
+      : "";
   }
 
   function formatTime(ms) {
