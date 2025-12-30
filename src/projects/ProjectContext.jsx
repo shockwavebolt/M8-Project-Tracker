@@ -202,9 +202,9 @@ function ProjectProvider({ children }) {
         project.id === projectId ? { ...project, status: newStatus } : project
       )
     );
-    newStatus === "Archived"
-      ? toast.success("Project successfully Archived")
-      : "";
+    newStatus === "Archived" ? toast.success("Project archived") : "";
+
+    newStatus === "Active" ? toast.success("Project pulled") : "";
   }
 
   function formatTime(ms) {

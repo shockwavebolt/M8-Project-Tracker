@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ProjectStats from "../UI/ProjectStats";
 import { useEffect, useRef, useState } from "react";
 import StyledDotMenu from "../UI/dotMenu";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useProject } from "./ProjectContext";
 
 const Wrapper = styled.li`
@@ -37,6 +37,7 @@ function ProjectItem({ item, linkUrl }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { deleteProject, updateStatus } = useProject();
   const menuRef = useRef();
+  const location = useLocation();
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -95,12 +96,24 @@ function ProjectItem({ item, linkUrl }) {
 
           {menuOpen && (
             <StyledDotMenu ref={menuRef}>
-              <div
-                className="cursor-pointer"
-                onClick={() => updateStatus(item.id, "Archived")}
-              >
-                Archive
-              </div>
+              {location.pathname === "/home" && (
+                <div
+                  className="cursor-pointer"
+                  onClick={() => updateStatus(item.id, "Archived")}
+                >
+                  Archive
+                </div>
+              )}
+
+              {location.pathname === "/archive" && (
+                <div
+                  className="cursor-pointer"
+                  onClick={() => updateStatus(item.id, "Active")}
+                >
+                  Pull
+                </div>
+              )}
+
               <div
                 className="cursor-pointer"
                 onClick={() => deleteProject(item.id)}

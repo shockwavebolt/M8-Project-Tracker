@@ -1,1 +1,1 @@
--Make sure status turns into complete when all tasks are done. (COMPLETED)
+-Bug:  Archived projects where tasks get completed get pulled once status change to active.
