@@ -5,16 +5,17 @@ import { useProject } from "../projects/ProjectContext";
 const TextArea = styled.textarea`
   all: unset; /* removes global inheritance */
   height: 200px;
-  padding: 16px;
+  padding: 24px 16px 24px 16px;
   align-self: stretch;
   border-radius: 16px;
-  border: 3px solid #474747;
-  background: #474747;
-  color: white;
+  box-shadow: 0 4px 4px 0 var(--color-shadow) inset;
+  border-bottom: 2px solid var(--color-highlight);
+  color: var(--color-black00);
   font-size: 16px;
 
   &:focus {
     outline: none;
+    box-shadow: 0 4px 4px 0 rgba(221, 164, 72, 0.5) inset;
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {

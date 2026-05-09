@@ -9,8 +9,10 @@ const StyledAppLayout = styled.div`
   display: grid;
   grid-template-columns: 100px 1fr;
   height: 100vh;
-  background-color: #1e1e1e;
-  padding: 12px;
+  background-color: var(--color-white00);
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
     display: flex;
@@ -22,9 +24,11 @@ const StyledAppLayout = styled.div`
 const Main = styled.div`
   height: 100%;
   padding: 64px 64px;
-  background-color: #333333;
+  background-color: var(--color-white00);
   border-radius: 32px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
+  box-shadow: 0 4px 4px 0 var(--color-shadow) inset;
+  border-bottom: 2px solid var(--color-highlight);
+
   overflow: auto;
 
   @media screen and (min-width: 320px) and (max-width: 768px) {

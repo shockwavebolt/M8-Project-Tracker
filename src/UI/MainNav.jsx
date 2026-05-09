@@ -11,6 +11,15 @@ const NavLayout = styled.div`
   align-items: center;
   gap: 96px;
   align-self: stretch;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  box-shadow: var(--shadow-md);
+  border-radius: 32px;
+  border-top: 2px solid var(--color-highlight);
+
+  &:hover {
+    box-shadow: var(--shadow-gld);
+  }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
     flex-direction: row;
@@ -18,7 +27,7 @@ const NavLayout = styled.div`
 `;
 
 const StyledNavLink = styled.div`
-  color: white;
+  color: var(--color-black00);
   font-size: 32px;
   @media screen and (min-width: 320px) and (max-width: 768px) {
     font-size: 24px;

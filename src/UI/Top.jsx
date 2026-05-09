@@ -14,17 +14,16 @@ function Top({ query, setQuery, children }) {
   return (
     <div className="flex flex-col gap-6">
       <Header>{children}</Header>
-      <div className="flex justify-between gap-1  items-center self-stretch">
-        <div className="flex items-center gap-1 md:gap-4">
+      <div className="flex justify-between gap-1   items-center self-stretch">
+        <div className="flex items-center  gap-1 md:gap-4">
           <input
-            className="h-10 text-[12px] md:text-[16px] placeholder-[#ADADAD] placeholder-opacity-70 "
-            placeholder="Search..."
+            className="h-14 text-[12px] w-[600px] bg-white00 md:text-[16px]  "
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           ></input>
-          <Button variation="primary_2" className="relative">
-            <HiBarsArrowDown className="absolute" />
-          </Button>
+          <button className="w-8 h-8 md:w-14 md:h-14 rounded-full flex items-center justify-center border-t-2 border-(--color-highlight) shadow-(--shadow-md) cursor-pointer hover:shadow-(--shadow-gld)">
+            <HiBarsArrowDown size={24} />
+          </button>
         </div>
         <span className="hidden md:block">
           <Button variation="primary" onClick={handleCreateProject}>

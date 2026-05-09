@@ -11,8 +11,8 @@ const Wrapper = styled.div`
   align-items: center;
   align-self: stretch;
   border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  background: var(--color-white);
+  box-shadow: 0 4px 4px 0 var(--color-shadow);
 `;
 
 const InnerWrapper = styled.div`
@@ -44,29 +44,29 @@ function ArchivedItem() {
     <Wrapper>
       <InnerWrapper>
         <ProjectInfo>
-          <div className=" text-[#1e1e1e]  text-[18px] font-(family-name:--font-01)">
+          <div className=" text-(--color-text-dark)  text-[18px] font-(family-name:--font-01)">
             {" "}
             Project Name
           </div>
-          <div className="text-[#474747] text-[16px] font-(family-name:--font-02)">
+          <div className="text-(--color-text-muted) text-[16px] font-(family-name:--font-02)">
             Lorem ipsum dolor sit amet consectetur.
           </div>
         </ProjectInfo>
         <ProjectStats>
           <div className="flex items-center gap-8 ">
-            <div className="flex p-3 gap-2 justify-center items-center text-[#474747]">
+            <div className="flex p-3 gap-2 justify-center items-center text-(--color-text-muted)">
               <FaCircle className="w-4 h-4  translate-y-[0.05em]" />
               <div>Archived</div>
             </div>
 
-            <div className="flex gap-2 items-center text-[#474747]">
+            <div className="flex gap-2 items-center text-(--color-text-muted)">
               80%{" "}
               <span>
                 <ProgressionBar />
               </span>
             </div>
 
-            <div className="flex gap-2 items-center text-[#474747]">
+            <div className="flex gap-2 items-center text-(--color-text-muted)">
               <span>
                 <BsStopwatch />
               </span>

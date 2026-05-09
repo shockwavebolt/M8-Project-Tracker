@@ -1,3 +1,35 @@
 @import "tailwindcss";
 
 @tailwind utilities;
+
+:root {
+  /* Backgrounds */
+  --color-bg: #1e1e1e;
+  --color-surface: #333333;
+  --color-elevated: #474747;
+  --color-white: #ffffff;
+
+  /* Text */
+  --color-text-dark: #1e1e1e;
+  --color-text-muted: #474747;
+  --color-text-subtle: #e6e6e6;
+  --color-text-placeholder: #adadad;
+
+  /* Status / Accent */
+  --color-accent: #00a6fb;
+  --color-status-active: #109648;
+  --color-status-paused: #e55812;
+
+  /* Effects */
+  --color-shadow: rgba(0, 0, 0, 0.25);
+
+  /* Mentos */
+  --color-white00: #eff6ee;
+  --color-black00: #1b1c28;
+  --color-green00: #109648;
+  --color-orange00: #e55812;
+  --color-highlight: #fff;
+
+  --shadow-md: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  --shadow-gld: 0 4px 4px 0 rgba(221, 164, 72, 0.5);
+}

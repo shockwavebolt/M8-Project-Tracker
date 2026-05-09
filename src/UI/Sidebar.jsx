@@ -5,9 +5,11 @@ import MainNav from "./MainNav";
 function Sidebar() {
   const StyledSidebar = styled.aside`
     display: flex;
-    padding-top: 48px;
+    padding-top: 40px;
     flex-direction: column;
     align-items: center;
+    padding-left: 12px;
+    padding-right: 12px;
     gap: 96px;
     align-self: stretch;
 

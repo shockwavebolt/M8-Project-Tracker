@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 1px;
+  padding: 2px;
   width: 100px;
   height: 32px;
-  border: 1px solid;
-  border-color: #474747;
   border-radius: 9999px;
+  box-shadow: 0 4px 4px 0 var(--color-shadow) inset;
+  border-bottom: 2px solid var(--color-highlight);
+
   overflow: hidden;
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
@@ -29,7 +30,7 @@ function ProgressionBar({ progress, status }) {
       <Bar
         style={{
           width: `${progress}%`,
-          backgroundColor: `${status != "Archived" ? "#00a6fb" : "#474747"}`,
+          backgroundColor: `${status != "Archived" ? "var(--color-black00)" : "var(--color-elevated)"}`,
         }}
       />
     </Container>

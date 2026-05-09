@@ -35,8 +35,8 @@ function ProjectOverview() {
                 <div
                   className={`flex gap-1 md:gap-2 items-center ${
                     project.status != "Archived"
-                      ? "text-[#00A6FB]"
-                      : "text-[#474747]"
+                      ? "text-(--color-black00)"
+                      : "text-(--color-text-muted)"
                   }`}
                 >
                   <span className="text-[12px] md:text-[16px]">
@@ -49,7 +49,7 @@ function ProjectOverview() {
                     />
                   </span>
                 </div>
-                <div className="flex gap-1 md:gap-2 items-center text-white">
+                <div className="flex gap-1 md:gap-2 items-center text-black00">
                   <span>
                     <BsStopwatch />
                   </span>
@@ -63,18 +63,18 @@ function ProjectOverview() {
           </div>
 
           {/* DESCRIPTION */}
-          <div className=" flex flex-col self-stretch  gap-2 p-3 border-t-2 border-[#474747] ">
-            <div className=" text-white text-[16px] md:text-[18px] font-(family-name:--font-01) ">
+          <div className=" flex flex-col self-stretch  gap-2 mt-3 pt-3 border-t border-(--color-elevated) ">
+            <div className=" text-black00  text-[16px] md:text-[18px] font-(family-name:--font-01) ">
               Description :
             </div>
-            <div className=" text-[#e6e6e6] text-[12px] md:text-[16px] font-(family-name:--font-02)">
+            <div className=" text-(--color-text-black00) text-[12px] md:text-[16px] font-(family-name:--font-02)">
               {project.description}
             </div>
           </div>
 
           {/* TASKS */}
-          <div className="flex flex-col items-start self-stretch gap-2 p-3 border-t-2 border-[#474747]">
-            <div className="font-(family-name:--font-01) text-white text-[16px] md:text-[18px]">
+          <div className="flex flex-col items-start self-stretch gap-2 mt-3 pt-3 border-t border-(--color-elevated)">
+            <div className="font-(family-name:--font-01) text-black text-[16px] md:text-[18px]">
               Tasks :
             </div>
             <ul className="flex flex-col items-start self-stretch gap-4 ">
@@ -89,8 +89,8 @@ function ProjectOverview() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-start gap-2 self-stretch p-3 border-t-2 border-[#474747]">
-            <div className="font-(--font-01) text-white text-[16px] md:text-[18px]">
+          <div className="flex flex-col items-start gap-2 self-stretch mt-3 pt-3 border-t border-(--color-black00)">
+            <div className="font-(--font-01) text-black00 text-[16px] md:text-[18px]">
               Notes :
             </div>
 

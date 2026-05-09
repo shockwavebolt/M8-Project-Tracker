@@ -9,12 +9,18 @@ import StyledDotMenu from "./dotMenu";
 
 const variations = {
   incomplete: css`
-    background: #fff;
+    background: var(--color-white00);
+    border-top: 2px solid var(--color-highlight);
+    box-shadow: var(--shadow-md);
+
+    &:hover {
+      box-shadow: var(--shadow-gld);
+    }
   `,
 
   completed: css`
-    color: white;
-    background: #474747;
+    color: var(--color-white00);
+    background: var(--color-black00);
   `,
 };
 
@@ -32,7 +38,7 @@ const EditInput = styled.input`
   all: unset; /* removes global inheritance */
   width: 100%;
   font-size: 16px;
-  color: #1e1e1e;
+  color: var(--color-text-dark);
   font-family: var(--font-font02);
 
   &:focus {

@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Archive from "./pages/Archive";
 import ProjectOverview from "./pages/ProjectOverview";
 import { ProjectProvider } from "./projects/ProjectContext";
-import CreateNewProject from "./projects/CreateNewProject";
+import CreateNewProject from "./pages/CreateNewProject";
 import { Toaster } from "react-hot-toast";
 
 function App() {

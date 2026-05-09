@@ -9,7 +9,6 @@ const variations = {
     gap: 4px;
     border-radius: 32px;
     font-size: 16px;
-    background: #474747;
     @media screen and (min-width: 320px) and (max-width: 768px) {
       font-size: 12px;
       padding: 16px 20px;
@@ -24,7 +23,6 @@ const variations = {
     display: grid;
     place-items: center;
     font-size: 12px;
-    background: #474747;
   `,
 
   secondary: css`
@@ -34,7 +32,6 @@ const variations = {
     justify-content: center;
     align-items: center;
     border-radius: 9999px;
-    background: #474747;
 
     @media screen and (min-width: 320px) and (max-width: 768px) {
       padding: 16px;
@@ -49,9 +46,6 @@ const variations = {
     gap: 4px;
     border-radius: 32px;
     font-size: 16px;
-    border-color: #474747;
-    border-width: 2px;
-    border-style: solid;
     @media screen and (min-width: 320px) and (max-width: 768px) {
       font-size: 12px;
       padding: 16px 20px;
@@ -66,20 +60,26 @@ const variations = {
     display: grid;
     place-items: center;
     font-size: 12px;
-    border-color: #474747;
+    border-color: var(--color-elevated);
     border-width: 2px;
     border-style: solid;
   `,
 };
 
 const Button = styled.button`
-  border: none;
-  color: white;
+  color: var(--color-black00);
   font-family: Urbanist;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   cursor: pointer;
+  border-top: 2px solid var(--color-highlight);
+
+  box-shadow: var(--shadow-md);
+
+  &:hover {
+    box-shadow: var(--shadow-gld);
+  }
   ${(props) => variations[props.variation]}
 `;
 

@@ -7,7 +7,7 @@ function Home() {
   const { projects } = useProject();
   const [query, setQuery] = useState("");
   const filteredProjects = projects.filter((project) =>
-    project.name?.toLowerCase().includes(query.toLowerCase())
+    project.name?.toLowerCase().includes(query.toLowerCase()),
   );
   return (
     <>
@@ -15,12 +15,12 @@ function Home() {
         <Top query={query} setQuery={setQuery}>
           All Projects
         </Top>
-        <ul className="flex flex-col gap-4 p-3 border-t-2 border-[#474747]">
+        <ul className="flex w-full flex-col gap-7 ">
           {filteredProjects.map(
             (item) =>
               item.status != "Archived" && (
                 <ProjectItem item={item} key={item.id} linkUrl={"projects"} />
-              )
+              ),
           )}
         </ul>
       </div>

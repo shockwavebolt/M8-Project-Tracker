@@ -13,9 +13,9 @@ const StatusMenu = styled.div`
   align-items: flex-start;
   gap: 10px;
   border-radius: 16px;
-  border: 1px solid #474747;
-  background: #1e1e1e;
-  box-shadow: 0 5px 7px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-elevated);
+  background: var(--color-bg);
+  box-shadow: 0 5px 7px 4px var(--color-shadow);
   @media screen and (min-width: 320px) and (max-width: 768px) {
     padding: 12px;
   }
@@ -63,12 +63,12 @@ function ProjectStatus({ projectId, status, progress }) {
     <div
       className={`relative flex md:p-3 gap-2 justify-center items-center  whitespace-nowrap   ${
         curStatus === "Active"
-          ? "text-[#618B25]"
+          ? "text-(--color-status-active)"
           : curStatus === "Paused"
-          ? "text-[#FF7F11]"
-          : curStatus === "Completed"
-          ? "text-[#00A6FB]"
-          : "text-[#474747]"
+            ? "text-(--color-status-paused)"
+            : curStatus === "Completed"
+              ? "text-(--color-black00)"
+              : "text-(--color-text-black00) opacity-80"
       }`}
     >
       {curStatus === "Not Started" ? (
@@ -90,11 +90,11 @@ function ProjectStatus({ projectId, status, progress }) {
       {menuOpen && (
         <StatusMenu>
           <FaCircle
-            className="w-3 h-3 md:w-4 md:h-4 text-[#618B25] cursor-pointer"
+            className="w-3 h-3 md:w-4 md:h-4 text-(--color-status-active) cursor-pointer"
             onClick={() => handleSelection("Active")}
           ></FaCircle>
           <FaCircle
-            className="w-3 h-3 md:w-4 md:h-4 text-[#FF7F11] cursor-pointer"
+            className="w-3 h-3 md:w-4 md:h-4 text-(--color-status-paused) cursor-pointer"
             onClick={() => handleSelection("Paused")}
           ></FaCircle>
         </StatusMenu>

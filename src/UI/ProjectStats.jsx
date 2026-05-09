@@ -26,7 +26,9 @@ function ProjectStats({ item }) {
 
         <div
           className={`flex gap-2 items-center ${
-            item.status != "Archived" ? "text-[#00a6fb]" : "text-[#474747]"
+            item.status != "Archived"
+              ? "text-(--color-black00)"
+              : "text-(--color-text-black00) opacity-80"
           }`}
         >
           <span className="hidden md:block">{Math.round(item.progress)}%</span>
@@ -35,7 +37,7 @@ function ProjectStats({ item }) {
           </span>
         </div>
 
-        <div className="flex gap-2 items-center text-[#474747] text-[12px] md:text-[16px] whitespace-nowrap">
+        <div className="flex gap-2 items-center text-(--color-text-muted) text-[12px] md:text-[16px] whitespace-nowrap">
           <span>
             <BsStopwatch />
           </span>

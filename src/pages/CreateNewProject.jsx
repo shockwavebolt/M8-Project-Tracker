@@ -2,7 +2,7 @@ import { useState } from "react";
 import BackButton from "../UI/BackButton";
 import Button from "../UI/Button";
 import Header from "../UI/Header";
-import { useProject } from "./ProjectContext";
+import { useProject } from "../projects/ProjectContext";
 import { useNavigate } from "react-router-dom";
 
 function CreateNewProject() {
@@ -42,24 +42,24 @@ function CreateNewProject() {
       </span>
       <div className="flex flex-col gap-8 md:gap-12 self-stretch w-[600px]">
         <Header>Create New Project</Header>
-        <div className="flex flex-col gap-6 p-3 border-t-2 border-[#474747] ">
+        <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <div className=" text-white text-[16px] md:text-[18px] font-(family-name:--font-01) ">
+            <div className=" text-black00 text-[16px] md:text-[18px] font-(family-name:--font-01) ">
               Project Name
             </div>
             <input
-              className="w-full h-10 text-[12px] md:text-[16px]"
+              className="w-full h-14 text-[12px] md:text-[16px]"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
             ></input>
           </div>
 
           <div className="flex flex-col gap-2">
-            <div className=" text-white text-[16px]  md:text-[18px] font-(family-name:--font-01) ">
+            <div className=" text-black00 text-[16px]  md:text-[18px] font-(family-name:--font-01) ">
               Description
             </div>
             <input
-              className="w-full h-10 text-[12px] md:text-[16px]"
+              className="w-full h-14 text-[12px] md:text-[16px]"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></input>

@@ -1,26 +1,38 @@
 import styled from "styled-components";
 
 const StyledDotMenu = styled.div`
-  position: absolute;
-  z-index: 50;
+  flex-shrink: 0;
+  width: ${({ $open }) => ($open ? "60px" : "0")};
+  transition: width 0.3s ease;
+`;
+
+const MenuContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 24px 16px;
+  align-items: center;
   gap: 16px;
-  background-color: #1e1e1e;
-  color: white;
+  width: 60px;
+  background: var(--color-white00);
+  color: var(--color-black00);
   border-radius: 16px;
-  border: 1px solid #474747;
-  background: #1e1e1e;
-  box-shadow: 0 5px 7px 4px rgba(0, 0, 0, 0.25);
+  border-top: 2px solid var(--color-highlight);
+  box-shadow: var(--shadow-gld);
+
   font-family: var(--font-02);
   font-size: 16px;
+  clip-path: ${({ $open }) =>
+    $open
+      ? "inset(-12px -12px -12px -12px round 16px)"
+      : "inset(-12px 112% -12px -12px round 16px)"};
+  transition: clip-path 0.3s ease;
+
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    left: -30px;
     padding: 12px;
     gap: 12px;
     font-size: 12px;
   }
 `;
 
+export { MenuContent };
 export default StyledDotMenu;
