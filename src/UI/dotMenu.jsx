@@ -2,17 +2,18 @@ import styled from "styled-components";
 
 const StyledDotMenu = styled.div`
   flex-shrink: 0;
-  width: ${({ $open }) => ($open ? "60px" : "0")};
+  width: ${({ $open, $row }) => ($open ? ($row ? "120px" : "60px") : "0")};
   transition: width 0.3s ease;
 `;
 
 const MenuContent = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 24px 16px;
+  flex-direction: ${({ $row }) => ($row ? "row" : "column")};
+  padding: ${({ $row }) => ($row ? "16px" : "24px 16px")};
   align-items: center;
+  justify-content: center;
   gap: 16px;
-  width: 60px;
+  width: ${({ $row }) => ($row ? "120px" : "60px")};
   background: var(--color-white00);
   color: var(--color-black00);
   border-radius: 16px;

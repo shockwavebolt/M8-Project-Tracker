@@ -133,7 +133,7 @@ function ProjectItem({ item, linkUrl }) {
           )}
 
           <div
-            className="cursor-pointer"
+            className="cursor-pointer text-(--color-red00)"
             onClick={() => deleteProject(item.id)}
           >
             <HiTrash />

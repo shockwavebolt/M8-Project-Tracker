@@ -33,6 +33,10 @@ function App() {
           toastOptions={{
             success: {
               duration: 3000,
+              iconTheme: {
+                primary: "var(--color-green00)", // the check color
+                secondary: "var(--color-white00)", // the circle background
+              },
             },
             error: {
               duration: 5000,
@@ -42,8 +46,8 @@ function App() {
               maxWidth: "90vw",
               width: "fit-content",
               padding: "1rem 1.5rem",
-              backgroundColor: "#474747",
-              color: "white",
+              backgroundColor: "var(--color-black00)",
+              color: "var(--color-white00)",
             },
           }}
         />

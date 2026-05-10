@@ -1,11 +1,14 @@
-import { BsStopwatch } from "react-icons/bs";
-import { HiDotsVertical } from "react-icons/hi";
+import { BsPencilSquare, BsStopwatch } from "react-icons/bs";
+import { HiDotsVertical, HiTrash } from "react-icons/hi";
 import { RxBox, RxPause, RxPlay } from "react-icons/rx";
 import { TfiCheckBox } from "react-icons/tfi";
 import styled, { css } from "styled-components";
 import { useProject } from "../projects/ProjectContext";
 import { useEffect, useRef, useState } from "react";
-import StyledDotMenu from "./dotMenu";
+import StyledDotMenu, { MenuContent } from "./dotMenu";
+import { LuTimerReset } from "react-icons/lu";
+import { FaEdit } from "react-icons/fa";
+import { RiResetLeftLine } from "react-icons/ri";
 
 const variations = {
   incomplete: css`
@@ -24,14 +27,24 @@ const variations = {
   `,
 };
 
+const OuterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+`;
+
 const TaskWrapper = styled.li`
   font-family: var(--font-font-02);
   display: flex;
+  flex: 1;
   padding: 12px 12px;
   align-items: center;
   align-self: stretch;
   border-radius: 16px;
   ${(props) => variations[props.variation]}
+  ${({ $menuOpen }) => $menuOpen && "box-shadow: var(--shadow-gld);"}
 `;
 
 const EditInput = styled.input`
@@ -43,6 +56,7 @@ const EditInput = styled.input`
 
   &:focus {
     outline: none;
+    box-shadow: none;
   }
 `;
 
@@ -122,55 +136,57 @@ function Task({ projectId, task }) {
   }, [menuOpen]);
 
   return (
-    <TaskWrapper variation={task.completed ? "completed" : "incomplete"}>
-      <div
-        className="flex w-full justify-between cursor-pointer"
-        onClick={handleClick}
+    <OuterContainer>
+      <TaskWrapper
+        variation={task.completed ? "completed" : "incomplete"}
+        $menuOpen={menuOpen}
       >
-        <div className="flex gap-2 items-center">
-          <div>{task.completed ? <TfiCheckBox /> : <RxBox />}</div>
-          {isEditing ? (
-            <EditInput
-              autoFocus
-              value={editedText}
-              onChange={(e) => setEditedText(e.target.value)}
-              onBlur={handleSave}
-              onKeyDown={(e) => e.key === "Enter" && handleSave()}
-            ></EditInput>
-          ) : (
-            <div
-              className={`text-[12px] md:text-[16px] ${
-                task.completed ? "line-through" : ""
-              }`}
-            >
-              {task.title}
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="flex gap-6 items-baseline">
-        <div className="flex  justify-center items-center gap-2">
-          <div>
-            {!task.completed ? (
-              <button className="cursor-pointer" onClick={toggleRunTime}>
-                {runTime ? <RxPause /> : <RxPlay />}
-              </button>
+        <div
+          className="flex w-full justify-between cursor-pointer"
+          onClick={handleClick}
+        >
+          <div className="flex gap-2 items-center">
+            <div>{task.completed ? <TfiCheckBox /> : <RxBox />}</div>
+            {isEditing ? (
+              <EditInput
+                autoFocus
+                value={editedText}
+                onChange={(e) => setEditedText(e.target.value)}
+                onBlur={handleSave}
+                onKeyDown={(e) => e.key === "Enter" && handleSave()}
+              ></EditInput>
             ) : (
-              <div>
-                {" "}
-                <BsStopwatch />
+              <div
+                className={`text-[12px] md:text-[16px] ${
+                  task.completed ? "line-through" : ""
+                }`}
+              >
+                {task.title}
               </div>
             )}
           </div>
-          <div className="text-[12px] md:text-[16px] whitespace-nowrap mr-2 md:mr-4">
-            {formatTime(displayTime)}
+        </div>
+        <div className="flex gap-6 items-baseline">
+          <div className="flex  justify-center items-center gap-2">
+            <div>
+              {!task.completed ? (
+                <button className="cursor-pointer" onClick={toggleRunTime}>
+                  {runTime ? <RxPause /> : <RxPlay />}
+                </button>
+              ) : (
+                <div>
+                  <BsStopwatch />
+                </div>
+              )}
+            </div>
+            <div className="text-[12px] md:text-[16px] whitespace-nowrap mr-2 md:mr-4">
+              {formatTime(displayTime)}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="relative">
         <button
-          className="cursor-pointer z-20"
+          className="cursor-pointer"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -179,28 +195,28 @@ function Task({ projectId, task }) {
         >
           <HiDotsVertical />
         </button>
+      </TaskWrapper>
 
-        {menuOpen && (
-          <StyledDotMenu ref={menuRef}>
-            <div
-              className="cursor-pointer"
-              onClick={() => resetTaskTimer(projectId, task.id)}
-            >
-              Reset
-            </div>
-            <div className="cursor-pointer" onClick={handleEdit}>
-              Edit
-            </div>
-            <div
-              className="cursor-pointer"
-              onClick={() => deleteTask(projectId, task.id)}
-            >
-              Delete
-            </div>
-          </StyledDotMenu>
-        )}
-      </div>
-    </TaskWrapper>
+      <StyledDotMenu ref={menuRef} $open={menuOpen} $row>
+        <MenuContent $open={menuOpen} $row>
+          <div
+            className="cursor-pointer"
+            onClick={() => resetTaskTimer(projectId, task.id)}
+          >
+            <RiResetLeftLine />
+          </div>
+          <div className="cursor-pointer" onClick={handleEdit}>
+            <FaEdit />
+          </div>
+          <div
+            className="cursor-pointer text-(--color-red00)"
+            onClick={() => deleteTask(projectId, task.id)}
+          >
+            <HiTrash />
+          </div>
+        </MenuContent>
+      </StyledDotMenu>
+    </OuterContainer>
   );
 }
 
