@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 const StyledDotMenu = styled.div`
   flex-shrink: 0;
+  display: flex;
+  align-self: stretch;
+
   width: ${({ $open, $row }) => ($open ? ($row ? "120px" : "60px") : "0")};
   transition: width 0.3s ease;
 `;
@@ -9,6 +12,7 @@ const StyledDotMenu = styled.div`
 const MenuContent = styled.div`
   display: flex;
   flex-direction: ${({ $row }) => ($row ? "row" : "column")};
+  height: 100%;
   padding: ${({ $row }) => ($row ? "16px" : "24px 16px")};
   align-items: center;
   justify-content: center;

@@ -17,7 +17,7 @@ const StyledAppLayout = styled.div`
   @media screen and (min-width: 320px) and (max-width: 768px) {
     display: flex;
     flex-direction: column-reverse;
-    padding: 4px;
+    padding: 8px;
   }
 `;
 
@@ -32,7 +32,7 @@ const Main = styled.div`
   overflow: auto;
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    padding: 24px 4px;
+    padding: 48px 24px;
     border-radius: 12px;
   }
 `;

@@ -5,7 +5,7 @@ function BackButton() {
   return (
     <button
       className="w-8 h-8 md:w-14 md:h-14 rounded-full flex items-center justify-center border-t-2 border-(--color-highlight) shadow-(--shadow-md) cursor-pointer hover:shadow-(--shadow-gld)"
-      onClick={() => navigate(-1)}
+      onClick={() => navigate("/home")}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -14,16 +14,16 @@ function Sidebar() {
     align-self: stretch;
 
     @media screen and (min-width: 320px) and (max-width: 768px) {
-      padding: 24px;
+      width: 100%;
+      padding: 12px 24px 12px 24px;
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-between;
       gap: auto;
     }
   `;
 
   return (
     <StyledSidebar>
-      {/* The logo placement should be replaced by the back button on mobile */}
       <Logo />
       <MainNav />
     </StyledSidebar>

@@ -30,12 +30,13 @@ const variations = {
 const OuterContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   gap: 8px;
-  align-self: stretch;
+  height: 100%;
+  width: 100%;
 `;
 
 const TaskWrapper = styled.li`
+  width: 100%;
   font-family: var(--font-font-02);
   display: flex;
   flex: 1;
