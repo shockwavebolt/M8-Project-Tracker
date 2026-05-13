@@ -33,4 +33,19 @@
 
   --shadow-md: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   --shadow-gld: 0 4px 4px 0 rgba(221, 164, 72, 0.5);
+
+  /* Midnight */
+  --color-black01: #101118;
+  --color-black02: #1b1c28;
+  --color-black03: #252736;
+  --color-mauve00: #8b80f9;
+  --color-teal: #00a6a6;
+  --color-orange01: #cb793a;
+  --color-white01: #faf9f0;
+
+  /* Theme-aware bar color (used in ProgressionBar) */
+  --color-bar: var(--color-black00);
+
+  /* Focus shadow (used in inputs / textareas) */
+  --shadow-focus: 0 4px 4px 0 rgba(221, 164, 72, 0.5);
 }

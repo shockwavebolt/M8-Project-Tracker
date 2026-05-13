@@ -4,6 +4,15 @@ import Button from "../UI/Button";
 import Header from "../UI/Header";
 import { useProject } from "../projects/ProjectContext";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const FieldLabel = styled.div`
+  color: var(--color-black00);
+
+  [data-theme="midnight"] & {
+    color: var(--color-white01);
+  }
+`;
 
 function CreateNewProject() {
   const [projectName, setProjectName] = useState("");
@@ -44,9 +53,9 @@ function CreateNewProject() {
         <Header>Create New Project</Header>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <div className=" text-black00 text-[16px] md:text-[18px] font-(family-name:--font-01) ">
+            <FieldLabel className="text-[16px] md:text-[18px] font-(family-name:--font-01)">
               Project Name
-            </div>
+            </FieldLabel>
             <input
               className="w-full h-14 text-[12px] md:text-[16px]"
               value={projectName}
@@ -55,9 +64,9 @@ function CreateNewProject() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <div className=" text-black00 text-[16px]  md:text-[18px] font-(family-name:--font-01) ">
+            <FieldLabel className="text-[16px] md:text-[18px] font-(family-name:--font-01)">
               Description
-            </div>
+            </FieldLabel>
             <input
               className="w-full h-14 text-[12px] md:text-[16px]"
               value={description}

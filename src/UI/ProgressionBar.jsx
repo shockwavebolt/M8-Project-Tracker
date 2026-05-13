@@ -30,7 +30,7 @@ function ProgressionBar({ progress, status }) {
       <Bar
         style={{
           width: `${progress}%`,
-          backgroundColor: `${status != "Archived" ? "var(--color-black00)" : "var(--color-elevated)"}`,
+          backgroundColor: `${status != "Archived" ? "var(--color-bar)" : "var(--color-elevated)"}`,
         }}
       />
     </Container>

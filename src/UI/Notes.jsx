@@ -15,7 +15,12 @@ const TextArea = styled.textarea`
 
   &:focus {
     outline: none;
-    box-shadow: 0 4px 4px 0 rgba(221, 164, 72, 0.5) inset;
+    box-shadow: var(--shadow-focus) inset;
+  }
+
+  [data-theme="midnight"] & {
+    background: var(--color-black03);
+    color: var(--color-white01);
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {

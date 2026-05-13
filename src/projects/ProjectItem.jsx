@@ -31,6 +31,16 @@ const Wrapper = styled.li`
   &:hover {
     box-shadow: var(--shadow-gld);
   }
+
+  [data-theme="midnight"] & {
+    background: var(--color-black03);
+    border: 2px solid var(--color-black03);
+  }
+
+  [data-theme="midnight"] &:hover {
+    box-shadow: none;
+    border: 2px solid var(--color-white00);
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -47,6 +57,10 @@ const ProjectInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 8px;
+
+  [data-theme="midnight"] & > div {
+    color: var(--color-white01);
+  }
 `;
 
 function ProjectItem({ item, linkUrl }) {
@@ -82,6 +96,7 @@ function ProjectItem({ item, linkUrl }) {
             key={item.id}
             to={`/${linkUrl}/${item.id}`}
           >
+            {/* Midnight: text-(--color-white01) */}
             <ProjectInfo>
               <div className=" text-(--color-black00) text-[16px]  md:text-[18px] font-(family-name:--font-01)">
                 <span>{item.name}</span>

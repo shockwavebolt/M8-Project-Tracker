@@ -17,6 +17,7 @@ function Top({ query, setQuery, children }) {
       <div className="flex justify-between gap-1   items-center self-stretch">
         <div className="flex w-full items-center  gap-1 md:gap-4">
           <input
+            // Midnight: --bg-black03
             className="h-12 text-[12px] w-[300px] md:w-[600px] bg-white00 md:h-12 md:text-[16px]"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -24,9 +25,6 @@ function Top({ query, setQuery, children }) {
           <Button variation="primary_2">
             <HiBarsArrowDown />
           </Button>
-          {/* <button className="w-10 h-10 p- rounded-full md:w-14 md:h-14  flex items-center justify-center border-t-2 border-(--color-highlight) shadow-(--shadow-md) cursor-pointer hover:shadow-(--shadow-gld)">
-            <HiBarsArrowDown />
-          </button> */}
         </div>
         <span className="hidden lg:block">
           <Button variation="primary" onClick={handleCreateProject}>

@@ -14,6 +14,10 @@ const StyledAppLayout = styled.div`
   padding-top: 12px;
   padding-bottom: 12px;
 
+  [data-theme="midnight"] & {
+    background-color: var(--color-black01);
+  }
+
   @media screen and (min-width: 320px) and (max-width: 768px) {
     display: flex;
     flex-direction: column-reverse;
@@ -30,6 +34,12 @@ const Main = styled.div`
   border-bottom: 2px solid var(--color-highlight);
 
   overflow: auto;
+
+  [data-theme="midnight"] & {
+    background-color: var(--color-black01);
+    box-shadow: none;
+    border: 2px solid var(--color-mauve00);
+  }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
     padding: 48px 24px;

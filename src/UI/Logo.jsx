@@ -18,6 +18,16 @@ const StyledLogo = styled.div`
   &:hover {
     box-shadow: var(--shadow-gld);
   }
+
+  [data-theme="midnight"] & {
+    color: var(--color-white01);
+    border: 2px solid var(--color-mauve00);
+  }
+
+  [data-theme="midnight"] &:hover {
+    border: 2px solid var(--color-white01);
+    box-shadow: none;
+  }
 `;
 
 function Logo() {

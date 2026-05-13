@@ -10,6 +10,10 @@ const StyledProjectStats = styled.div`
   width: 100%;
   align-items: baseline;
   flex-grow: 1;
+
+  [data-theme="midnight"] & {
+    color: var(--color-white01);
+  }
 `;
 
 function ProjectStats({ item }) {

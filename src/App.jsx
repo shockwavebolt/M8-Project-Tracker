@@ -7,11 +7,13 @@ import ProjectOverview from "./pages/ProjectOverview";
 import { ProjectProvider } from "./projects/ProjectContext";
 import CreateNewProject from "./pages/CreateNewProject";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
     <>
       <GlobalStyles />
+      <ThemeProvider>
       <ProjectProvider>
         <BrowserRouter>
           <Routes>
@@ -52,6 +54,7 @@ function App() {
           }}
         />
       </ProjectProvider>
+      </ThemeProvider>
     </>
   );
 }

@@ -8,6 +8,14 @@ import BackButton from "../UI/BackButton";
 import TasksInput from "../projects/TasksInput";
 import ProjectStatus from "../UI/ProjectStatus";
 import Notes from "../UI/Notes";
+import styled from "styled-components";
+
+const TextSection = styled.div`
+  [data-theme="midnight"] & {
+    color: var(--color-white01);
+    border-color: var(--color-black03);
+  }
+`;
 
 function ProjectOverview() {
   const { projects, getProjectElapsed, formatTime } = useProject();
@@ -25,7 +33,7 @@ function ProjectOverview() {
             <div className="flex flex-col w-full gap-8">
               <Header>{project.name}</Header>
 
-              <div className="flex justify-between items-center text-[18px] font-(family-name:--font-01) ">
+              <TextSection className="flex justify-between items-center text-[18px] font-(family-name:--font-01) ">
                 <ProjectStatus
                   projectId={project.id}
                   status={project.status}
@@ -57,23 +65,22 @@ function ProjectOverview() {
                     {formatTime(getProjectElapsed(project))}
                   </span>
                 </div>
-              </div>
+              </TextSection>
             </div>
-            {/* <HiDotsVertical className="text-white w-8 h-8" /> */}
           </div>
 
           {/* DESCRIPTION */}
-          <div className=" flex flex-col self-stretch  gap-2 mt-3 pt-3 border-t border-(--color-elevated) ">
+          <TextSection className=" flex flex-col self-stretch  gap-2 mt-3 pt-3 border-t border-(--color-elevated) ">
             <div className=" text-black00  text-[16px] md:text-[18px] font-(family-name:--font-01) ">
               Description :
             </div>
             <div className=" text-(--color-text-black00) text-[12px] md:text-[16px] font-(family-name:--font-02)">
               {project.description}
             </div>
-          </div>
+          </TextSection>
 
           {/* TASKS */}
-          <div className="flex flex-col items-start self-stretch gap-2 mt-3 pt-3 border-t border-(--color-elevated)">
+          <TextSection className="flex flex-col items-start self-stretch gap-2 mt-3 pt-3 border-t border-(--color-elevated)">
             <div className="font-(family-name:--font-01) text-black text-[16px] md:text-[18px]">
               Tasks :
             </div>
@@ -87,16 +94,16 @@ function ProjectOverview() {
 
               <TasksInput projectId={project.id} />
             </ul>
-          </div>
+          </TextSection>
 
-          <div className="flex flex-col items-start gap-2 self-stretch mt-3 pt-3 border-t border-(--color-black00)">
+          <TextSection className="flex flex-col items-start gap-2 self-stretch mt-3 pt-3 border-t border-(--color-black00)">
             <div className="font-(--font-01) text-black00 text-[16px] md:text-[18px]">
               Notes :
             </div>
 
             {/* TEXT AREA */}
             <Notes project={project} />
-          </div>
+          </TextSection>
         </div>
       </div>
     </>

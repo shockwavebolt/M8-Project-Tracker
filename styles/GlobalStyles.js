@@ -28,7 +28,18 @@ color: var(--color-black00);
 
   input:focus{
    outline: none;
-   box-shadow: 0 4px 4px 0 rgba(221, 164, 72, 0.5) inset;
+   box-shadow: var(--shadow-focus) inset;
+  }
+
+  [data-theme="midnight"] input {
+    background: var(--color-black01);
+    border: 2px solid var(--color-mauve00);
+    color: var(--color-white01);
+  }
+
+  [data-theme="midnight"] input:focus {
+    box-shadow: none ;
+  
   }
 
 button{

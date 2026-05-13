@@ -8,6 +8,10 @@ const Header = styled.h1`
   font-weight: 400;
   line-height: normal;
 
+  [data-theme="midnight"] & {
+    color: var(--color-white01);
+  }
+
   @media screen and (min-width: 320px) and (max-width: 768px) {
     font-size: 24px;
   }

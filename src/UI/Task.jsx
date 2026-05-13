@@ -19,11 +19,27 @@ const variations = {
     &:hover {
       box-shadow: var(--shadow-gld);
     }
+
+    [data-theme="midnight"] & {
+      background: var(--color-black01);
+      border: 2px solid var(--color-black03);
+      color: var(--color-white01);
+    }
+
+    [data-theme="midnight"] &:hover {
+      box-shadow: none;
+      border: 2px solid var(--color-white01);
+    }
   `,
 
   completed: css`
     color: var(--color-white00);
     background: var(--color-black00);
+
+    [data-theme="midnight"] & {
+      background: var(--color-black03);
+      color: var(--color-white01);
+    }
   `,
 };
 

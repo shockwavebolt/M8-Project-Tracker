@@ -80,7 +80,17 @@ const Button = styled.button`
   &:hover {
     box-shadow: var(--shadow-gld);
   }
+
   ${(props) => variations[props.variation]}
+
+  [data-theme="midnight"] & {
+    color: var(--color-white01);
+    border: 2px solid var(--color-highlight);
+  }
+
+  [data-theme="midnight"] &:hover {
+    border: 2px solid var(--color-white);
+  }
 `;
 
 export default Button;

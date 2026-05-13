@@ -32,6 +32,12 @@ const MenuContent = styled.div`
       : "inset(-12px 112% -12px -12px round 16px)"};
   transition: clip-path 0.3s ease;
 
+  [data-theme="midnight"] & {
+    background: var(--color-black01);
+    color: var(--color-white01);
+    border: 2px solid var(--color-white01);
+  }
+
   @media screen and (min-width: 320px) and (max-width: 768px) {
     padding: 12px;
     gap: 12px;
