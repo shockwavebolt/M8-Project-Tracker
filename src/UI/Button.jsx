@@ -76,6 +76,7 @@ const Button = styled.button`
   border-top: 2px solid var(--color-highlight);
 
   box-shadow: var(--shadow-md);
+  transition: box-shadow 0.25s ease, background 0.25s ease;
 
   &:hover {
     box-shadow: var(--shadow-gld);
@@ -84,12 +85,58 @@ const Button = styled.button`
   ${(props) => variations[props.variation]}
 
   [data-theme="midnight"] & {
+    position: relative;
     color: var(--color-white01);
-    border: 2px solid var(--color-highlight);
+    border: 1px solid transparent;
+    background: none;
+    transition: box-shadow 0.25s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        to bottom,
+        var(--color-mauve00),
+        var(--color-white01)
+      );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      border: 1px solid var(--color-white01);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
   }
 
   [data-theme="midnight"] &:hover {
-    border: 2px solid var(--color-white);
+    box-shadow: none;
+
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
   }
 `;
 

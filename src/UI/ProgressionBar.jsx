@@ -10,6 +10,13 @@ const Container = styled.div`
 
   overflow: hidden;
 
+  [data-theme="midnight"] & {
+    box-shadow: none;
+    padding: 1px;
+    background: var(--color-white01);
+    border: 2px solid var(--color-teal);
+  }
+
   @media screen and (min-width: 320px) and (max-width: 768px) {
     width: 60px;
     height: 20px;
@@ -30,7 +37,7 @@ function ProgressionBar({ progress, status }) {
       <Bar
         style={{
           width: `${progress}%`,
-          backgroundColor: `${status != "Archived" ? "var(--color-bar)" : "var(--color-elevated)"}`,
+          backgroundColor: `${status != "Archived" ? "var(--color-pulled)" : "var(--color-archived)"}`,
         }}
       />
     </Container>

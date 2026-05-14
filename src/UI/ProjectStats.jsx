@@ -23,16 +23,11 @@ function ProjectStats({ item }) {
       <div className="flex items-center gap-2 md:gap-8 ">
         <ProjectStatus status={item.status} />
 
-        {/* <div className="flex p-3 gap-2 justify-center items-center text-[#B3E493]">
-              <FaCircle className="w-4 h-4  translate-y-[0.05em]" />
-              <div>{item.status}</div>
-            </div> */}
-
         <div
           className={`flex gap-2 items-center ${
             item.status != "Archived"
-              ? "text-(--color-black00)"
-              : "text-(--color-text-black00) opacity-80"
+              ? "text-(--color-pulled)"
+              : "text-(--color-archived) opacity-80"
           }`}
         >
           <span className="hidden md:block">{Math.round(item.progress)}%</span>

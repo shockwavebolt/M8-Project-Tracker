@@ -43,8 +43,8 @@ function ProjectOverview() {
                 <div
                   className={`flex gap-1 md:gap-2 items-center ${
                     project.status != "Archived"
-                      ? "text-(--color-black00)"
-                      : "text-(--color-text-muted)"
+                      ? "text-(--color-pulled)"
+                      : "text-(--color-archived)"
                   }`}
                 >
                   <span className="text-[12px] md:text-[16px]">
@@ -81,7 +81,7 @@ function ProjectOverview() {
 
           {/* TASKS */}
           <TextSection className="flex flex-col items-start self-stretch gap-2 mt-3 pt-3 border-t border-(--color-elevated)">
-            <div className="font-(family-name:--font-01) text-black text-[16px] md:text-[18px]">
+            <div className="font-(family-name:--font-01) text-black00 text-[16px] md:text-[18px]">
               Tasks :
             </div>
             <ul className="flex flex-col items-start self-stretch gap-4 ">

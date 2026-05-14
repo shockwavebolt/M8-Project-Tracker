@@ -21,14 +21,14 @@ const variations = {
     }
 
     [data-theme="midnight"] & {
-      background: var(--color-black01);
-      border: 2px solid var(--color-black03);
+      background: var(--color-black03);
+      border: 1px solid var(--color-black03);
       color: var(--color-white01);
     }
 
     [data-theme="midnight"] &:hover {
       box-shadow: none;
-      border: 2px solid var(--color-white01);
+      border: 1px solid var(--color-white01);
     }
   `,
 
@@ -37,7 +37,7 @@ const variations = {
     background: var(--color-black00);
 
     [data-theme="midnight"] & {
-      background: var(--color-black03);
+      background: var(--color-teal);
       color: var(--color-white01);
     }
   `,
@@ -62,6 +62,14 @@ const TaskWrapper = styled.li`
   border-radius: 16px;
   ${(props) => variations[props.variation]}
   ${({ $menuOpen }) => $menuOpen && "box-shadow: var(--shadow-gld);"}
+
+  [data-theme="midnight"] & {
+    box-shadow: none;
+    border: ${({ $menuOpen }) =>
+      $menuOpen
+        ? "1px solid var(--color-white01)"
+        : "1px solid var(--color-black03)"};
+  }
 `;
 
 const EditInput = styled.input`

@@ -67,8 +67,10 @@ function ProjectStatus({ projectId, status, progress }) {
           : curStatus === "Paused"
             ? "text-(--color-status-paused)"
             : curStatus === "Completed"
-              ? "text-(--color-black00)"
-              : "text-(--color-text-black00) opacity-80"
+              ? "text-(--color-status-completed)"
+              : curStatus === "Archived"
+                ? "text-(--color-archived) opacity-80"
+                : ""
       }`}
     >
       {curStatus === "Not Started" ? (

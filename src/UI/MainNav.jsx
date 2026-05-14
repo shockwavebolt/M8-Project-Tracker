@@ -17,19 +17,65 @@ const NavLayout = styled.div`
   box-shadow: var(--shadow-md);
   border-radius: 32px;
   border-top: 2px solid var(--color-highlight);
+  transition: box-shadow 0.3s ease;
 
   &:hover {
     box-shadow: var(--shadow-gld);
   }
 
   [data-theme="midnight"] & {
+    position: relative;
     color: var(--color-white01);
-    border: 2px solid var(--color-mauve00);
+    border: 1px solid transparent;
+    background: var(--color-black01);
+    transition: box-shadow 0.3s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 32px;
+      padding: 1px;
+      background: linear-gradient(
+        to bottom,
+        var(--color-mauve00),
+        var(--color-white01)
+      );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 32px;
+      border: 1px solid var(--color-white01);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
   }
 
   [data-theme="midnight"] &:hover {
-    border: 2px solid var(--color-white01);
     box-shadow: none;
+
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {

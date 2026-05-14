@@ -25,6 +25,7 @@ const Wrapper = styled.li`
   border-radius: 12px;
   border-top: 2px solid var(--color-highlight);
   background: var(--color-white00);
+
   box-shadow: ${({ $menuOpen }) =>
     $menuOpen ? "var(--shadow-gld)" : "var(--shadow-md)"};
 
@@ -34,12 +35,27 @@ const Wrapper = styled.li`
 
   [data-theme="midnight"] & {
     background: var(--color-black03);
-    border: 2px solid var(--color-black03);
+    border: 1px solid var(--color-black03);
+    box-shadow: none;
+    border: ${({ $menuOpen }) =>
+      $menuOpen
+        ? "1px solid var(--color-white01)"
+        : "1px solid var(--color-black03)"};
   }
 
   [data-theme="midnight"] &:hover {
     box-shadow: none;
-    border: 2px solid var(--color-white00);
+    border: 1px solid var(--color-white00);
+  }
+`;
+
+const DotsButton = styled.button`
+  cursor: pointer;
+  margin-left: 24px;
+  color: var(--color-black00);
+
+  [data-theme="midnight"] & {
+    color: var(--color-white01);
   }
 `;
 
@@ -57,8 +73,22 @@ const ProjectInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 8px;
+`;
 
-  [data-theme="midnight"] & > div {
+const ProjectName = styled.div`
+  color: var(--color-black00);
+  font-family: var(--font-01);
+
+  [data-theme="midnight"] & {
+    color: var(--color-white01);
+  }
+`;
+
+const ProjectDescription = styled.div`
+  color: var(--color-black00);
+  font-family: var(--font-02);
+
+  [data-theme="midnight"] & {
     color: var(--color-white01);
   }
 `;
@@ -96,14 +126,13 @@ function ProjectItem({ item, linkUrl }) {
             key={item.id}
             to={`/${linkUrl}/${item.id}`}
           >
-            {/* Midnight: text-(--color-white01) */}
             <ProjectInfo>
-              <div className=" text-(--color-black00) text-[16px]  md:text-[18px] font-(family-name:--font-01)">
+              <ProjectName className="text-[16px] md:text-[18px]">
                 <span>{item.name}</span>
-              </div>
-              <div className=" hidden md:block  text-(--color-black00) text-[12px] md:text-[16px]  font-(family-name:--font-02)">
+              </ProjectName>
+              <ProjectDescription className="hidden md:block text-[12px] md:text-[16px]">
                 {item.description}
-              </div>
+              </ProjectDescription>
               <span className="block md:hidden">
                 <ProjectStats item={item} />
               </span>
@@ -114,8 +143,7 @@ function ProjectItem({ item, linkUrl }) {
             </span>
           </Link>
 
-          <button
-            className="cursor-pointer"
+          <DotsButton
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -123,7 +151,7 @@ function ProjectItem({ item, linkUrl }) {
             }}
           >
             <HiDotsVertical />
-          </button>
+          </DotsButton>
         </InnerWrapper>
       </Wrapper>
 
