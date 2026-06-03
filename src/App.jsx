@@ -15,7 +15,7 @@ function App() {
       <GlobalStyles />
       <ThemeProvider>
       <ProjectProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/M8-Project-Tracker">
           <Routes>
             <Route element={<AppLayout />}>
               <Route index element={<Navigate replace to="home" />} />
