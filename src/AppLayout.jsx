@@ -21,9 +21,19 @@ const StyledAppLayout = styled.div`
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    display: flex;
-    flex-direction: column-reverse;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
     padding: 8px;
+
+    & > :first-child {
+      grid-row: 2;
+    }
+
+    & > :last-child {
+      grid-row: 1;
+      min-height: 0;
+    }
   }
 `;
 
@@ -50,6 +60,7 @@ const Main = styled.div`
   @media screen and (min-width: 320px) and (max-width: 768px) {
     padding: 48px 24px;
     border-radius: 12px;
+    overflow: auto;
   }
 `;
 
