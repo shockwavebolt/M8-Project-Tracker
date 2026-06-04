@@ -13,6 +13,8 @@ const StyledAppLayout = styled.div`
   padding-right: 12px;
   padding-top: 12px;
   padding-bottom: 12px;
+  position: fixed;
+  width: 100%;
 
   [data-theme="midnight"] & {
     background-color: var(--color-black01);
