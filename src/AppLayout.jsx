@@ -25,7 +25,7 @@ const StyledAppLayout = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
     height: 100dvh;
-    padding: 8px;
+    padding: 4px;
 
     & > :first-child {
       grid-row: 2;
@@ -60,7 +60,7 @@ const Main = styled.div`
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    padding: 48px 24px;
+    padding: 24px 24px;
     border-radius: 12px;
     overflow: auto;
   }
