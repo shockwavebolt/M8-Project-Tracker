@@ -4,7 +4,7 @@ const StyledDotMenu = styled.div`
   flex-shrink: 0;
   display: flex;
   align-self: stretch;
-
+  overflow: hidden;
   width: ${({ $open, $row }) => ($open ? ($row ? "120px" : "60px") : "0")};
   transition: width 0.3s ease;
 `;

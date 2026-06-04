@@ -52,7 +52,6 @@ const OuterContainer = styled.div`
 `;
 
 const TaskWrapper = styled.li`
-  width: 100%;
   font-family: var(--font-font-02);
   display: flex;
   flex: 1;
@@ -167,11 +166,11 @@ function Task({ projectId, task }) {
         $menuOpen={menuOpen}
       >
         <div
-          className="flex w-full justify-between cursor-pointer"
+          className="flex w-full min-w-0 justify-between cursor-pointer"
           onClick={handleClick}
         >
-          <div className="flex gap-2 items-center">
-            <div>{task.completed ? <TfiCheckBox /> : <RxBox />}</div>
+          <div className="flex gap-2 items-center min-w-0 overflow-hidden">
+            <div className="shrink-0">{task.completed ? <TfiCheckBox /> : <RxBox />}</div>
             {isEditing ? (
               <EditInput
                 autoFocus
@@ -184,7 +183,7 @@ function Task({ projectId, task }) {
               <div
                 className={`text-[12px] md:text-[16px] ${
                   task.completed ? "line-through" : ""
-                }`}
+                } ${menuOpen ? "truncate" : ""}`}
               >
                 {task.title}
               </div>
