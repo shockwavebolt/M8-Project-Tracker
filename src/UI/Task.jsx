@@ -52,6 +52,7 @@ const OuterContainer = styled.div`
 `;
 
 const TaskWrapper = styled.li`
+  width: 100%;
   font-family: var(--font-font-02);
   display: flex;
   flex: 1;
