@@ -14,11 +14,11 @@ function Sidebar() {
     align-self: stretch;
 
     @media screen and (min-width: 320px) and (max-width: 768px) {
-      width: 100%;
+      /* width: 100%; */
       padding: 12px 24px 12px 24px;
       flex-direction: row;
       justify-content: space-between;
-      gap: auto;
+      gap: 0;
     }
   `;
 
