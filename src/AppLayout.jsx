@@ -41,7 +41,8 @@ const Main = styled.div`
     border: 1px solid transparent;
     background:
       linear-gradient(var(--color-black01), var(--color-black01)) padding-box,
-      linear-gradient(to bottom, var(--color-mauve00), var(--color-white01)) border-box;
+      linear-gradient(to bottom, var(--color-mauve00), var(--color-white01))
+        border-box;
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {

@@ -19,6 +19,10 @@ const StyledLogo = styled.div`
     box-shadow: var(--shadow-gld);
   }
 
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    font-size: 16px;
+  }
+
   [data-theme="midnight"] & {
     position: relative;
     color: var(--color-white01);

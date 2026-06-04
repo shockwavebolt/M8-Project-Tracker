@@ -80,7 +80,7 @@ const NavLayout = styled.div`
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
     flex-direction: row;
-    gap: 48px;
+    gap: 32px;
     padding: 0 24px 0 24px;
   }
 `;
@@ -94,7 +94,7 @@ const StyledNavLink = styled.div`
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    font-size: 24px;
+    font-size: 16px;
   }
 `;
 
