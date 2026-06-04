@@ -24,6 +24,7 @@ const StyledAppLayout = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
+    height: 100dvh;
     padding: 8px;
 
     & > :first-child {
@@ -33,6 +34,7 @@ const StyledAppLayout = styled.div`
     & > :last-child {
       grid-row: 1;
       min-height: 0;
+      overflow: auto;
     }
   }
 `;
