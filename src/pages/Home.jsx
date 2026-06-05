@@ -11,7 +11,7 @@ function Home() {
   );
   return (
     <>
-      <div className="flex flex-col  gap-8">
+      <div className="flex flex-col  gap-8 ">
         <Top query={query} setQuery={setQuery}>
           All Projects
         </Top>

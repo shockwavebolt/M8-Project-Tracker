@@ -1,4 +1,4 @@
-import { HiBarsArrowDown } from "react-icons/hi2";
+// import { HiBarsArrowDown } from "react-icons/hi2";
 import Button from "./Button";
 import { HiPlus } from "react-icons/hi";
 import Header from "./Header";
@@ -8,7 +8,7 @@ import styled from "styled-components";
 const SearchWrapper = styled.div`
   position: relative;
   display: inline-flex;
-  width: 300px;
+  width: 100%;
   border-radius: 32px;
 
   @media screen and (min-width: 768px) {
@@ -68,6 +68,7 @@ const SearchInput = styled.input`
   height: 48px;
   font-size: 12px;
   width: 100%;
+
   background: none;
 
   @media screen and (min-width: 768px) {
@@ -92,7 +93,7 @@ function Top({ query, setQuery, children }) {
   return (
     <div className="flex flex-col gap-6">
       <Header>{children}</Header>
-      <div className="flex justify-between gap-1   items-center self-stretch">
+      <div className="flex  w-full lg:justify-between gap-2   items-center ">
         <div className="flex w-full items-center  gap-1 md:gap-4">
           <SearchWrapper>
             <SearchInput
@@ -100,9 +101,9 @@ function Top({ query, setQuery, children }) {
               onChange={(e) => setQuery(e.target.value)}
             />
           </SearchWrapper>
-          <Button variation="primary_2">
+          {/* <Button variation="primary_2">
             <HiBarsArrowDown />
-          </Button>
+          </Button> */}
         </div>
         <span className="hidden lg:block">
           <Button variation="primary" onClick={handleCreateProject}>

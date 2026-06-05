@@ -7,6 +7,10 @@ const StyledDotMenu = styled.div`
 
   width: ${({ $open, $row }) => ($open ? ($row ? "120px" : "60px") : "0")};
   transition: width 0.3s ease;
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    width: ${({ $open, $row }) => ($open ? ($row ? "80px" : "20px") : "0")};
+  }
 `;
 
 const MenuContent = styled.div`
@@ -40,9 +44,7 @@ const MenuContent = styled.div`
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    padding: 12px;
-    gap: 12px;
-    font-size: 12px;
+    width: ${({ $open, $row }) => ($open ? ($row ? "80px" : "20px") : "0")};
   }
 `;
 

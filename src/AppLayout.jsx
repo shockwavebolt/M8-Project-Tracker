@@ -14,7 +14,10 @@ const StyledAppLayout = styled.div`
   padding-top: 12px;
   padding-bottom: 12px;
   position: fixed;
-  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   [data-theme="midnight"] & {
     background-color: var(--color-black01);
@@ -34,20 +37,21 @@ const StyledAppLayout = styled.div`
     & > :last-child {
       grid-row: 1;
       min-height: 0;
-      overflow: auto;
     }
   }
 `;
 
 const Main = styled.div`
   height: 100%;
+  min-width: 0;
   padding: 64px 64px;
   background-color: var(--color-white00);
   border-radius: 32px;
   box-shadow: 0 4px 4px 0 var(--color-shadow) inset;
   border-bottom: 2px solid var(--color-highlight);
 
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   [data-theme="midnight"] & {
     background-color: var(--color-black01);
@@ -60,13 +64,15 @@ const Main = styled.div`
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    padding: 24px 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 24px 8px;
     border-radius: 12px;
-    overflow: auto;
   }
 `;
 
 const Container = styled.div`
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
