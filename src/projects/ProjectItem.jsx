@@ -17,6 +17,7 @@ const OuterContainer = styled.div`
 
 const Wrapper = styled.li`
   display: flex;
+  min-width: 0;
   padding: 16px 0;
   flex: 1;
   flex-direction: column;
@@ -57,6 +58,10 @@ const DotsButton = styled.button`
   [data-theme="midnight"] & {
     color: var(--color-white01);
   }
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    margin-left: 8px;
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -65,6 +70,11 @@ const InnerWrapper = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   align-self: stretch;
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    justify-content: ${({ $menuOpen }) => ($menuOpen ? "flex-start" : "space-between")};
+    gap: ${({ $menuOpen }) => ($menuOpen ? "8px" : "0")};
+  }
 `;
 
 const ProjectInfo = styled.div`
@@ -118,9 +128,9 @@ function ProjectItem({ item, linkUrl }) {
   }, [menuOpen]);
 
   return (
-    <OuterContainer>
+    <OuterContainer ref={menuRef}>
       <Wrapper $menuOpen={menuOpen}>
-        <InnerWrapper>
+        <InnerWrapper $menuOpen={menuOpen}>
           <Link
             className="flex w-full justify-between"
             key={item.id}
@@ -144,6 +154,7 @@ function ProjectItem({ item, linkUrl }) {
           </Link>
 
           <DotsButton
+            $menuOpen={menuOpen}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -155,7 +166,7 @@ function ProjectItem({ item, linkUrl }) {
         </InnerWrapper>
       </Wrapper>
 
-      <StyledDotMenu ref={menuRef} $open={menuOpen}>
+      <StyledDotMenu $open={menuOpen}>
         <MenuContent $open={menuOpen}>
           {location.pathname === "/home" && (
             <div

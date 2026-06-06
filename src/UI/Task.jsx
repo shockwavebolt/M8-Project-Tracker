@@ -52,7 +52,7 @@ const OuterContainer = styled.div`
 `;
 
 const TaskWrapper = styled.li`
-  width: 100%;
+  min-width: 0;
   font-family: var(--font-font-02);
   display: flex;
   flex: 1;
@@ -161,17 +161,17 @@ function Task({ projectId, task }) {
   }, [menuOpen]);
 
   return (
-    <OuterContainer>
+    <OuterContainer ref={menuRef}>
       <TaskWrapper
         variation={task.completed ? "completed" : "incomplete"}
         $menuOpen={menuOpen}
       >
         <div
-          className="flex w-full justify-between cursor-pointer"
+          className={`flex w-full justify-between cursor-pointer ${menuOpen ? "min-w-0 overflow-hidden" : ""}`}
           onClick={handleClick}
         >
-          <div className="flex gap-2 items-center">
-            <div>{task.completed ? <TfiCheckBox /> : <RxBox />}</div>
+          <div className={`flex gap-2 items-center ${menuOpen ? "min-w-0" : ""}`}>
+            <div className="shrink-0">{task.completed ? <TfiCheckBox /> : <RxBox />}</div>
             {isEditing ? (
               <EditInput
                 autoFocus
@@ -184,7 +184,7 @@ function Task({ projectId, task }) {
               <div
                 className={`text-[12px] md:text-[16px] ${
                   task.completed ? "line-through" : ""
-                }`}
+                } ${menuOpen ? "truncate" : ""}`}
               >
                 {task.title}
               </div>
@@ -222,7 +222,7 @@ function Task({ projectId, task }) {
         </button>
       </TaskWrapper>
 
-      <StyledDotMenu ref={menuRef} $open={menuOpen} $row>
+      <StyledDotMenu $open={menuOpen} $row>
         <MenuContent $open={menuOpen} $row>
           <div
             className="cursor-pointer"
