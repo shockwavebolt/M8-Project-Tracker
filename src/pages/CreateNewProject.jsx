@@ -71,11 +71,12 @@ const InputWrapper = styled.div`
 const FormInput = styled.input`
   width: 100%;
   height: 56px;
-  font-size: 12px;
+  font-size: 16px;
   background: none;
 
-  @media screen and (min-width: 768px) {
-    font-size: 16px;
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    height: 40px;
+    font-size: 12px;
   }
 
   [data-theme="midnight"] & {
@@ -124,7 +125,7 @@ function CreateNewProject() {
         <Header>Create New Project</Header>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <FieldLabel className="text-[16px] md:text-[18px] font-(family-name:--font-01)">
+            <FieldLabel className=" text-[16px] md:text-[18px] font-(family-name:--font-01)">
               Project Name
             </FieldLabel>
             <InputWrapper>
@@ -136,7 +137,7 @@ function CreateNewProject() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <FieldLabel className="text-[16px] md:text-[18px] font-(family-name:--font-01)">
+            <FieldLabel className=" text-[16px] md:text-[18px] font-(family-name:--font-01)">
               Description
             </FieldLabel>
             <InputWrapper>
@@ -147,7 +148,7 @@ function CreateNewProject() {
             </InputWrapper>
           </div>
 
-          <div className="flex gap-2 md:gap-6">
+          <div className="flex gap-4 md:gap-6">
             <Button variation="primary" onClick={handleCancel}>
               Cancel
             </Button>
