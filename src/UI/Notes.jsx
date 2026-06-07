@@ -87,7 +87,7 @@ const TextArea = styled.textarea`
   @media screen and (min-width: 320px) and (max-width: 768px) {
     font-size: 12px;
     height: 150px;
-    padding: 8px;
+    padding: 16px 8px 16px 8px;
   }
 `;
 

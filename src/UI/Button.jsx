@@ -38,20 +38,6 @@ const variations = {
     }
   `,
 
-  tertiary: css`
-    display: flex;
-    padding: 12px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    border-radius: 32px;
-    font-size: 16px;
-    @media screen and (min-width: 320px) and (max-width: 768px) {
-      font-size: 12px;
-      padding: 16px 20px;
-    }
-  `,
-
   tertiary_2: css`
     padding: 0;
     width: 40px;
@@ -76,7 +62,9 @@ const Button = styled.button`
   border-top: 2px solid var(--color-highlight);
 
   box-shadow: var(--shadow-md);
-  transition: box-shadow 0.25s ease, background 0.25s ease;
+  transition:
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 
   &:hover {
     box-shadow: var(--shadow-gld);

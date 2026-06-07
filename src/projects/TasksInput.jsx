@@ -60,12 +60,13 @@ const InputWrapper = styled.div`
 
 const TaskInput = styled.input`
   width: 100%;
-  height: 56px;
-  font-size: 12px;
+  height: 48px;
+  font-size: 16px;
   background: none;
 
-  @media screen and (min-width: 768px) {
-    font-size: 16px;
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    height: 40px;
+    font-size: 12px;
   }
 
   [data-theme="midnight"] & {
@@ -111,15 +112,12 @@ function TasksInput({ projectId }) {
           <span>New Task</span>
         </Button>
       ) : (
-        <div className="flex gap-2 w-full ">
+        <div className="flex items-center gap-2 w-full ">
           <InputWrapper>
-            <TaskInput
-              value={task}
-              onChange={(e) => setTask(e.target.value)}
-            />
+            <TaskInput value={task} onChange={(e) => setTask(e.target.value)} />
           </InputWrapper>
           <span className=" hidden md:flex gap-2">
-            <Button variation="tertiary" onClick={handleCancelClick}>
+            <Button variation="primary" onClick={handleCancelClick}>
               Cancel
             </Button>
             <Button variation="primary" onClick={handleSubmit}>
@@ -129,11 +127,11 @@ function TasksInput({ projectId }) {
 
           {/* Mobile version */}
           <span className=" flex  md:hidden gap-1">
-            <Button variation="tertiary_2" onClick={handleCancelClick}>
+            <Button variation="primary_2" onClick={handleCancelClick}>
               &#x2715;
             </Button>
             <Button variation="primary_2" onClick={handleSubmit}>
-              <HiPlus />
+              &#xFF0B;
             </Button>
           </span>
         </div>

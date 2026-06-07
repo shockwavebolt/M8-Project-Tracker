@@ -148,7 +148,7 @@ function CreateNewProject() {
           </div>
 
           <div className="flex gap-2 md:gap-6">
-            <Button variation="tertiary" onClick={handleCancel}>
+            <Button variation="primary" onClick={handleCancel}>
               Cancel
             </Button>
             <Button variation="primary" onClick={handleSubmit}>

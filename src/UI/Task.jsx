@@ -170,8 +170,12 @@ function Task({ projectId, task }) {
           className={`flex w-full justify-between cursor-pointer ${menuOpen ? "min-w-0 overflow-hidden" : ""}`}
           onClick={handleClick}
         >
-          <div className={`flex gap-2 items-center ${menuOpen ? "min-w-0" : ""}`}>
-            <div className="shrink-0">{task.completed ? <TfiCheckBox /> : <RxBox />}</div>
+          <div
+            className={`flex gap-2 items-center ${menuOpen ? "min-w-0" : ""}`}
+          >
+            <div className="shrink-0">
+              {task.completed ? <TfiCheckBox /> : <RxBox />}
+            </div>
             {isEditing ? (
               <EditInput
                 autoFocus
