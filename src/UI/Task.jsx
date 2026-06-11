@@ -6,7 +6,6 @@ import styled, { css } from "styled-components";
 import { useProject } from "../projects/ProjectContext";
 import { useEffect, useRef, useState } from "react";
 import StyledDotMenu, { MenuContent } from "./dotMenu";
-import { LuTimerReset } from "react-icons/lu";
 import { FaEdit } from "react-icons/fa";
 import { RiResetLeftLine } from "react-icons/ri";
 
@@ -85,15 +84,6 @@ const EditInput = styled.input`
   }
 `;
 
-function formatTime(ms) {
-  const totalSeconds = Math.floor(ms / 1000);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  return `${hours}h ${minutes}m ${seconds}s`;
-}
-
 function Task({ projectId, task }) {
   const {
     toggleTask,
@@ -102,12 +92,12 @@ function Task({ projectId, task }) {
     startTaskTimer,
     pauseTaskTimer,
     resetTaskTimer,
+    formatTime,
   } = useProject();
 
   const [menuOpen, setOpenMenu] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(task.title);
-  const [runTime, setRunTime] = useState(false);
   const [displayTime, setDisplayTime] = useState(task.elapsed);
   const menuRef = useRef(null);
 
@@ -133,13 +123,11 @@ function Task({ projectId, task }) {
   }
 
   function toggleRunTime() {
-    if (runTime) {
+    if (task.isRunning) {
       pauseTaskTimer(projectId, task.id);
     } else {
       startTaskTimer(projectId, task.id);
     }
-
-    setRunTime(!runTime);
   }
 
   useEffect(() => {
@@ -200,7 +188,7 @@ function Task({ projectId, task }) {
             <div>
               {!task.completed ? (
                 <button className="cursor-pointer" onClick={toggleRunTime}>
-                  {runTime ? <RxPause /> : <RxPlay />}
+                  {task.isRunning ? <RxPause /> : <RxPlay />}
                 </button>
               ) : (
                 <div>
@@ -208,7 +196,7 @@ function Task({ projectId, task }) {
                 </div>
               )}
             </div>
-            <div className="text-[12px] md:text-[16px] whitespace-nowrap mr-2 md:mr-4">
+            <div className="text-[12px] md:text-[16px] whitespace-nowrap mr-2 md:mr-4 tabular-nums">
               {formatTime(displayTime)}
             </div>
           </div>

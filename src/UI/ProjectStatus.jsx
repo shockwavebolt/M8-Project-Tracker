@@ -1,62 +1,64 @@
 import { useEffect, useState } from "react";
-import { FaCircle, FaRegCircle } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { FaRegCircle } from "react-icons/fa";
 import styled from "styled-components";
 import { useProject } from "../projects/ProjectContext";
 
-const StatusMenu = styled.div`
-  position: absolute;
-  z-index: 50;
-  left: 100%;
+const StatusBtnPaused = styled.div`
   display: flex;
-  padding: 16px 16px;
-  align-items: flex-start;
-  gap: 10px;
-  border-radius: 16px;
-  border: 1px solid var(--color-elevated);
-  background: var(--color-bg);
-  box-shadow: 0 5px 7px 4px var(--color-shadow);
-  @media screen and (min-width: 320px) and (max-width: 768px) {
-    padding: 12px;
+  align-items: center;
+  border-radius: 9999px;
+`;
+
+const StatusBtnActive = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 1px;
+  justify-content: center;
+  border-radius: 9999px;
+  border-top: 1px solid #fff;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+
+  [data-theme="midnight"] & {
+    position: relative;
+    border: 1px solid var(--color-white01);
+    padding: 1px;
+    background: none;
+    box-shadow: none;
+    transition: box-shadow 0.25s ease;
+  }
+
+  [data-theme="midnight"] &:hover {
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
   }
 `;
 
 function ProjectStatus({ projectId, status, progress }) {
   const [curStatus, setCurStatus] = useState(status);
-  const { updateStatus } = useProject();
-  const { id } = useParams();
-  const [menuOpen, setOpenMenu] = useState(false);
+  const { updateStatus, pauseProject } = useProject();
 
   useEffect(() => {
     if (status === "Paused") return;
 
     if (progress === 100 && status !== "Completed") {
-      setCurStatus("Completed");
       updateStatus(projectId, "Completed");
     } else if (progress === 0 && status !== "Not Started") {
-      setCurStatus("Not Started");
       updateStatus(projectId, "Not Started");
-    } else if (
-      progress > 0 &&
-      progress < 100 &&
-      status !== "Active" &&
-      status != "Archived"
-    ) {
-      updateStatus(projectId, "Active");
     }
   }, [progress, projectId, status, updateStatus]);
 
   useEffect(() => setCurStatus(status), [status]);
 
-  function toggleMenu() {
-    if (id && curStatus !== "Completed" && curStatus !== "Not Started")
-      setOpenMenu(!menuOpen);
-  }
-
-  function handleSelection(newStatus) {
-    setCurStatus(newStatus);
-    updateStatus(projectId, newStatus);
-    setOpenMenu(!menuOpen);
+  function handlePause(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    pauseProject(projectId);
   }
 
   return (
@@ -75,13 +77,18 @@ function ProjectStatus({ projectId, status, progress }) {
     >
       {curStatus === "Not Started" ? (
         <FaRegCircle className="w-3 h-3 md:w-4 md:h-4 translate-y-[0.05em]" />
+      ) : curStatus === "Paused" ? (
+        <StatusBtnPaused>
+          <div className="w-4 h-4 md:w-4 md:h-4 rounded-full bg-(--color-status-paused) " />
+        </StatusBtnPaused>
       ) : (
-        <FaCircle className="w-3 h-3 md:w-4 md:h-4  translate-y-[0.05em]" />
+        <StatusBtnActive onClick={handlePause}>
+          <div className="w-3  h-3 md:w-4 md:h-4 rounded-full bg-(--color-status-active)" />
+        </StatusBtnActive>
       )}
 
       <div
-        onClick={toggleMenu}
-        className={`cursor-pointer text-[12px] md:text-[16px] ${
+        className={`text-[12px] md:text-[16px] ${
           curStatus === "Completed" || curStatus === "Not Started"
             ? "pointer-events-none"
             : ""
@@ -89,18 +96,6 @@ function ProjectStatus({ projectId, status, progress }) {
       >
         {curStatus}
       </div>
-      {menuOpen && (
-        <StatusMenu>
-          <FaCircle
-            className="w-3 h-3 md:w-4 md:h-4 text-(--color-status-active) cursor-pointer"
-            onClick={() => handleSelection("Active")}
-          ></FaCircle>
-          <FaCircle
-            className="w-3 h-3 md:w-4 md:h-4 text-(--color-status-paused) cursor-pointer"
-            onClick={() => handleSelection("Paused")}
-          ></FaCircle>
-        </StatusMenu>
-      )}
     </div>
   );
 }

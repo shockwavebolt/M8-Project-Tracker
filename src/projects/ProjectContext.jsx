@@ -6,7 +6,7 @@ const projectData = [
     id: 11,
     name: " Hearth&Bean",
     description: "Coffee shop web design",
-    status: "Active",
+    status: "Paused",
     tasks: [
       {
         id: 111,
@@ -73,7 +73,7 @@ const projectData = [
     id: 13,
     name: "NovaFit",
     description: "Personal trainer portfolio site",
-    status: "Active",
+    status: "Paused",
     tasks: [
       {
         id: 131,
@@ -117,7 +117,7 @@ function ProjectProvider({ children }) {
     projectData.map((project) => ({
       ...project,
       progress: calculateProgress(project),
-    }))
+    })),
   );
 
   function addNewProject(newProject) {
@@ -127,7 +127,7 @@ function ProjectProvider({ children }) {
 
   function deleteProject(projectId) {
     setProjects((prevProjects) =>
-      prevProjects.filter((project) => projectId != project.id)
+      prevProjects.filter((project) => projectId != project.id),
     );
     toast.success("Project successfully deleted");
   }
@@ -144,39 +144,52 @@ function ProjectProvider({ children }) {
           };
         }
         return project;
-      })
+      }),
     );
     toast.success("New Task Added");
   }
 
   function toggleTask(projectId, taskId) {
+    const now = Date.now();
     setProjects((prevProjects) =>
       prevProjects.map((project) => {
-        if (project.id === projectId) {
-          const updatedTasks = project.tasks.map((task) =>
-            task.id === taskId ? { ...task, completed: !task.completed } : task
-          );
+        if (project.id !== projectId) return project;
+
+        const updatedTasks = project.tasks.map((task) => {
+          if (task.id !== taskId) return task;
+          const completing = !task.completed;
           return {
-            ...project,
-            tasks: updatedTasks,
-            progress: calculateProgress({ ...project, tasks: updatedTasks }),
+            ...task,
+            completed: completing,
+            ...(completing && task.isRunning
+              ? { isRunning: false, elapsed: task.elapsed + (now - task.lastStart), lastStart: null }
+              : {}),
           };
-        }
-        return project;
-      })
+        });
+
+        const anyRunning = updatedTasks.some((t) => !t.completed && t.isRunning);
+
+        return {
+          ...project,
+          tasks: updatedTasks,
+          progress: calculateProgress({ ...project, tasks: updatedTasks }),
+          status: !anyRunning && project.status === "Active" ? "Paused" : project.status,
+        };
+      }),
     );
   }
 
   function deleteTask(projectId, taskId) {
     setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        project.id === projectId
-          ? {
-              ...project,
-              tasks: project.tasks.filter((task) => task.id !== taskId),
-            }
-          : project
-      )
+      prevProjects.map((project) => {
+        if (project.id !== projectId) return project;
+        const updatedTasks = project.tasks.filter((task) => task.id !== taskId);
+        return {
+          ...project,
+          tasks: updatedTasks,
+          progress: calculateProgress({ ...project, tasks: updatedTasks }),
+        };
+      }),
     );
     toast.success("Task successfully deleted");
   }
@@ -188,19 +201,19 @@ function ProjectProvider({ children }) {
           ? {
               ...project,
               tasks: project.tasks.map((task) =>
-                task.id === taskId ? { ...task, title: newTitle } : task
+                task.id === taskId ? { ...task, title: newTitle } : task,
               ),
             }
-          : project
-      )
+          : project,
+      ),
     );
   }
 
   function updateStatus(projectId, newStatus) {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
-        project.id === projectId ? { ...project, status: newStatus } : project
-      )
+        project.id === projectId ? { ...project, status: newStatus } : project,
+      ),
     );
     newStatus === "Archived" ? toast.success("Project archived") : "";
 
@@ -213,7 +226,7 @@ function ProjectProvider({ children }) {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
-    return `${hours}h ${minutes}m ${seconds}s`;
+    return `${hours}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
   }
 
   function startTaskTimer(projectId, taskId) {
@@ -222,76 +235,115 @@ function ProjectProvider({ children }) {
         projectId === project.id
           ? {
               ...project,
+              status: "Active",
               tasks: project.tasks.map((task) =>
                 taskId === task.id
                   ? { ...task, isRunning: true, lastStart: Date.now() }
-                  : task
+                  : task,
               ),
             }
-          : project
-      )
+          : project,
+      ),
+    );
+  }
+
+  function pauseProject(projectId) {
+    const now = Date.now();
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === projectId
+          ? {
+              ...project,
+              status: "Paused",
+              tasks: project.tasks.map((task) =>
+                task.isRunning
+                  ? {
+                      ...task,
+                      isRunning: false,
+                      elapsed: task.elapsed + (now - task.lastStart),
+                      lastStart: null,
+                    }
+                  : task,
+              ),
+            }
+          : project,
+      ),
     );
   }
 
   function pauseTaskTimer(projectId, taskId) {
     setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        projectId === project.id
-          ? {
-              ...project,
-              tasks: project.tasks.map((task) =>
-                taskId === task.id
-                  ? {
-                      ...task,
-                      isRunning: false,
-                      elapsed: task.elapsed + (Date.now() - task.lastStart),
-                      lastStart: null,
-                    }
-                  : task
-              ),
-            }
-          : project
-      )
+      prevProjects.map((project) => {
+        if (projectId !== project.id) return project;
+
+        const updatedTasks = project.tasks.map((task) =>
+          taskId === task.id
+            ? {
+                ...task,
+                isRunning: false,
+                elapsed: task.elapsed + (Date.now() - task.lastStart),
+                lastStart: null,
+              }
+            : task,
+        );
+
+        const anyRunning = updatedTasks.some(
+          (t) => !t.completed && t.isRunning,
+        );
+
+        return {
+          ...project,
+          status:
+            !anyRunning && project.status === "Active"
+              ? "Paused"
+              : project.status,
+          tasks: updatedTasks,
+        };
+      }),
     );
   }
 
   function resetTaskTimer(projectId, taskId) {
     setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        projectId === project.id
-          ? {
-              ...project,
-              tasks: project.tasks.map((task) =>
-                taskId === task.id
-                  ? { ...task, isRunning: false, lastStart: null, elapsed: 0 }
-                  : task
-              ),
-            }
-          : project
-      )
+      prevProjects.map((project) => {
+        if (projectId !== project.id) return project;
+
+        const updatedTasks = project.tasks.map((task) =>
+          taskId === task.id
+            ? { ...task, isRunning: false, lastStart: null, elapsed: 0 }
+            : task,
+        );
+
+        const anyRunning = updatedTasks.some((t) => !t.completed && t.isRunning);
+
+        return {
+          ...project,
+          status: !anyRunning && project.status === "Active" ? "Paused" : project.status,
+          tasks: updatedTasks,
+        };
+      }),
     );
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProjects((prev) =>
-        prev.map((project) => ({
+      setProjects((prev) => {
+        const hasRunning = prev.some((project) =>
+          project.tasks.some((t) => t.isRunning),
+        );
+        if (!hasRunning) return prev;
+
+        return prev.map((project) => ({
           ...project,
           tasks: project.tasks.map((t) => {
             if (t.isRunning && t.lastStart) {
               const now = Date.now();
-              const diff = now - t.lastStart;
-
-              return {
-                ...t,
-                elapsed: (t.elapsed || 0) + diff, // <--- SAFEGUARD
-                lastStart: now,
-              };
+              return { ...t, elapsed: t.elapsed + (now - t.lastStart), lastStart: now };
             }
             return t;
           }),
-        }))
-      );
+        }));
+      });
     }, 1000);
 
     return () => clearInterval(interval);
@@ -304,8 +356,8 @@ function ProjectProvider({ children }) {
   function updateNotes(projectId, newNote) {
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
-        project.id === projectId ? { ...project, notes: newNote } : project
-      )
+        project.id === projectId ? { ...project, notes: newNote } : project,
+      ),
     );
   }
 
@@ -320,6 +372,7 @@ function ProjectProvider({ children }) {
         deleteTask,
         editTask,
         updateStatus,
+        pauseProject,
         startTaskTimer,
         pauseTaskTimer,
         resetTaskTimer,

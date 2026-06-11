@@ -21,6 +21,7 @@ function ProjectOverview() {
   const { projects, getProjectElapsed, formatTime } = useProject();
   const { id } = useParams();
   const project = projects.find((p) => p.id === Number(id));
+  if (!project) return null;
   return (
     <>
       <div className="flex md:gap-10 ">
@@ -61,7 +62,7 @@ function ProjectOverview() {
                   <span>
                     <BsStopwatch />
                   </span>
-                  <span className="text-[12px] md:text-[16px]">
+                  <span className="text-[12px] md:text-[16px] tabular-nums font-(family-name:--font-02)">
                     {formatTime(getProjectElapsed(project))}
                   </span>
                 </div>

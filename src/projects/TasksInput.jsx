@@ -100,7 +100,7 @@ function TasksInput({ projectId }) {
       elapsed: 0,
     };
     addTask(projectId, newTask);
-    setTask(" ");
+    setTask("");
     setAddingTask(false);
   }
 

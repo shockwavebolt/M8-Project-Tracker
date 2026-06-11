@@ -20,8 +20,12 @@ function ProjectStats({ item }) {
   const { getProjectElapsed, formatTime } = useProject();
   return (
     <StyledProjectStats>
-      <div className="flex items-center gap-2 md:gap-8 ">
-        <ProjectStatus status={item.status} />
+      <div className="flex items-center gap-8">
+        <ProjectStatus
+          projectId={item.id}
+          status={item.status}
+          progress={item.progress}
+        />
 
         <div
           className={`flex gap-2 items-center ${
@@ -36,7 +40,7 @@ function ProjectStats({ item }) {
           </span>
         </div>
 
-        <div className="flex gap-2 items-center text-(--color-text-muted) text-[12px] md:text-[16px] whitespace-nowrap">
+        <div className="flex gap-2 items-center text-(--color-text-muted) text-[12px] md:text-[16px] whitespace-nowrap tabular-nums">
           <span>
             <BsStopwatch />
           </span>
