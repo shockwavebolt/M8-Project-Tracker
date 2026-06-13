@@ -36,7 +36,6 @@ const Wrapper = styled.li`
 
   [data-theme="midnight"] & {
     background: var(--color-black03);
-    border: 1px solid var(--color-black03);
     box-shadow: none;
     border: ${({ $menuOpen }) =>
       $menuOpen
@@ -66,20 +65,23 @@ const DotsButton = styled.button`
 
 const InnerWrapper = styled.div`
   display: flex;
+  min-width: 0;
   padding: 0 16px;
   justify-content: space-between;
   align-items: flex-start;
   align-self: stretch;
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    justify-content: ${({ $menuOpen }) => ($menuOpen ? "flex-start" : "space-between")};
-    gap: ${({ $menuOpen }) => ($menuOpen ? "8px" : "0")};
+    justify-content: ${({ $menuOpen }) =>
+      $menuOpen ? "flex-start" : "space-between"};
+    gap: ${({ $menuOpen }) => ($menuOpen ? "4px" : "0")};
   }
 `;
 
 const ProjectInfo = styled.div`
   display: flex;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   flex-direction: column;
   justify-content: center;
   gap: 8px;
@@ -132,7 +134,7 @@ function ProjectItem({ item, linkUrl }) {
       <Wrapper $menuOpen={menuOpen}>
         <InnerWrapper $menuOpen={menuOpen}>
           <Link
-            className="flex w-full justify-between"
+            className="flex w-full min-w-0 gap-4 items-center"
             key={item.id}
             to={`/${linkUrl}/${item.id}`}
           >
