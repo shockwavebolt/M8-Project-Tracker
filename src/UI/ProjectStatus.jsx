@@ -48,7 +48,7 @@ function ProjectStatus({ projectId, status, progress }) {
 
     if (progress === 100 && status !== "Completed") {
       updateStatus(projectId, "Completed");
-    } else if (progress === 0 && status !== "Not Started") {
+    } else if (progress === 0 && status === "Completed") {
       updateStatus(projectId, "Not Started");
     } else if (status === "Completed" && progress < 100) {
       updateStatus(projectId, "Paused");

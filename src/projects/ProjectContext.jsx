@@ -141,6 +141,7 @@ function ProjectProvider({ children }) {
             ...project,
             tasks: updatedTasks,
             progress: calculateProgress({ ...project, tasks: updatedTasks }),
+            status: project.status === "Not Started" ? "Paused" : project.status,
           };
         }
         return project;
