@@ -44,12 +44,14 @@ function ProjectStatus({ projectId, status, progress }) {
   const { updateStatus, pauseProject } = useProject();
 
   useEffect(() => {
-    if (status === "Paused") return;
+    if (status === "Archived") return;
 
     if (progress === 100 && status !== "Completed") {
       updateStatus(projectId, "Completed");
     } else if (progress === 0 && status !== "Not Started") {
       updateStatus(projectId, "Not Started");
+    } else if (status === "Completed" && progress < 100) {
+      updateStatus(projectId, "Paused");
     }
   }, [progress, projectId, status, updateStatus]);
 
@@ -71,7 +73,7 @@ function ProjectStatus({ projectId, status, progress }) {
             : curStatus === "Completed"
               ? "text-(--color-status-completed)"
               : curStatus === "Archived"
-                ? "text-(--color-archived) opacity-80"
+                ? "text-(--color-archived) opacity-50"
                 : ""
       }`}
     >
@@ -79,13 +81,17 @@ function ProjectStatus({ projectId, status, progress }) {
         <FaRegCircle className="w-3 h-3 md:w-4 md:h-4 translate-y-[0.05em]" />
       ) : curStatus === "Paused" ? (
         <StatusBtnPaused>
-          <div className="w-4 h-4 md:w-4 md:h-4 rounded-full bg-(--color-status-paused) " />
+          <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-(--color-status-paused) " />
         </StatusBtnPaused>
-      ) : (
+      ) : curStatus === "Active" ? (
         <StatusBtnActive onClick={handlePause}>
           <div className="w-3  h-3 md:w-4 md:h-4 rounded-full bg-(--color-status-active)" />
         </StatusBtnActive>
-      )}
+      ) : curStatus === "Completed" ? (
+        <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-(--color-status-completed)" />
+      ) : curStatus === "Archived" ? (
+        <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-(--color-archived)" />
+      ) : null}
 
       <div
         className={`text-[12px] md:text-[16px] ${

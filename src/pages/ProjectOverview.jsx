@@ -90,7 +90,12 @@ function ProjectOverview() {
                 .slice()
                 .sort((a, b) => a.completed - b.completed)
                 .map((task) => (
-                  <Task key={task.id} projectId={project.id} task={task} />
+                  <Task
+                    key={task.id}
+                    projectId={project.id}
+                    task={task}
+                    projectStatus={project.status}
+                  />
                 ))}
 
               <TasksInput projectId={project.id} />

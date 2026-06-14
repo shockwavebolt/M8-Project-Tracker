@@ -30,7 +30,7 @@ function ProjectStats({ item }) {
           className={`flex gap-2 items-center ${
             item.status != "Archived"
               ? "text-(--color-pulled)"
-              : "text-(--color-archived) opacity-80"
+              : "text-(--color-archived) opacity-50"
           }`}
         >
           <span className="hidden md:block">{Math.round(item.progress)}%</span>

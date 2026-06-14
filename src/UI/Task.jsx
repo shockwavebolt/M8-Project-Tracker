@@ -84,7 +84,7 @@ const EditInput = styled.input`
   }
 `;
 
-function Task({ projectId, task }) {
+function Task({ projectId, task, projectStatus }) {
   const {
     toggleTask,
     deleteTask,
@@ -186,7 +186,7 @@ function Task({ projectId, task }) {
         <div className="flex gap-6 items-baseline">
           <div className="flex  justify-center items-center gap-2">
             <div>
-              {!task.completed ? (
+              {!task.completed && projectStatus !== "Archived" ? (
                 <button className="cursor-pointer" onClick={toggleRunTime}>
                   {task.isRunning ? <RxPause /> : <RxPlay />}
                 </button>

@@ -59,7 +59,7 @@ const DotsButton = styled.button`
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
-    margin-left: 8px;
+    margin-left: 4px;
   }
 `;
 
@@ -84,7 +84,7 @@ const ProjectInfo = styled.div`
   min-width: 0;
   flex-direction: column;
   justify-content: center;
-  gap: 8px;
+  gap: 16px;
 `;
 
 const ProjectName = styled.div`
@@ -182,7 +182,7 @@ function ProjectItem({ item, linkUrl }) {
           {location.pathname === "/archive" && (
             <div
               className="cursor-pointer"
-              onClick={() => updateStatus(item.id, "Active")}
+              onClick={() => updateStatus(item.id, "Paused")}
             >
               Pull
             </div>
