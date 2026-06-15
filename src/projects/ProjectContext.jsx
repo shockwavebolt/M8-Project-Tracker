@@ -129,7 +129,7 @@ function ProjectProvider({ children }) {
     setProjects((prevProjects) =>
       prevProjects.filter((project) => projectId != project.id),
     );
-    toast.success("Projectdeleted");
+    toast.success("Project deleted");
   }
 
   function addTask(projectId, newTask) {
