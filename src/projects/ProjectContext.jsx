@@ -221,14 +221,19 @@ function ProjectProvider({ children }) {
   }
 
   function updateStatus(projectId, newStatus) {
+    const project = projects.find((p) => p.id === projectId);
+
     setProjects((prevProjects) =>
       prevProjects.map((project) =>
         project.id === projectId ? { ...project, status: newStatus } : project,
       ),
     );
-    newStatus === "Archived" ? toast.success("Project archived") : "";
 
-    newStatus === "Paused" ? toast.success("Project pulled") : "";
+    if (newStatus === "Archived") {
+      toast.success("Project archived");
+    } else if (newStatus === "Paused" && project?.status === "Archived") {
+      toast.success("Project pulled");
+    }
   }
 
   function formatTime(ms) {
