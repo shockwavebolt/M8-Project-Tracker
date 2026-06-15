@@ -15,9 +15,13 @@ const variations = {
     border-top: 2px solid var(--color-highlight);
     box-shadow: var(--shadow-md);
 
-    &:hover {
-      box-shadow: var(--shadow-gld);
-    }
+    ${({ $isArchived }) =>
+      !$isArchived &&
+      css`
+        &:hover {
+          box-shadow: var(--shadow-gld);
+        }
+      `}
 
     [data-theme="midnight"] & {
       background: var(--color-black03);
@@ -25,10 +29,14 @@ const variations = {
       color: var(--color-white01);
     }
 
-    [data-theme="midnight"] &:hover {
-      box-shadow: none;
-      border: 1px solid var(--color-white01);
-    }
+    ${({ $isArchived }) =>
+      !$isArchived &&
+      css`
+        [data-theme="midnight"] &:hover {
+          box-shadow: none;
+          border: 1px solid var(--color-white01);
+        }
+      `}
   `,
 
   completed: css`
@@ -100,8 +108,10 @@ function Task({ projectId, task, projectStatus }) {
   const [editedText, setEditedText] = useState(task.title);
   const [displayTime, setDisplayTime] = useState(task.elapsed);
   const menuRef = useRef(null);
+  const isArchived = projectStatus === "Archived";
 
   function handleClick() {
+    if (isArchived) return;
     toggleTask(projectId, task.id);
     console.log(task.completed);
   }
@@ -153,15 +163,16 @@ function Task({ projectId, task, projectStatus }) {
       <TaskWrapper
         variation={task.completed ? "completed" : "incomplete"}
         $menuOpen={menuOpen}
+        $isArchived={isArchived}
       >
         <div
-          className={`flex w-full justify-between cursor-pointer ${menuOpen ? "min-w-0 overflow-hidden" : ""}`}
+          className={`flex w-full justify-between ${isArchived ? "" : "cursor-pointer"} ${menuOpen ? "min-w-0 overflow-hidden" : ""}`}
           onClick={handleClick}
         >
           <div
             className={`flex gap-2 items-center ${menuOpen ? "min-w-0" : ""}`}
           >
-            <div className="shrink-0">
+            <div className={`shrink-0 ${isArchived ? "hidden" : ""}`}>
               {task.completed ? <TfiCheckBox /> : <RxBox />}
             </div>
             {isEditing ? (
@@ -174,7 +185,7 @@ function Task({ projectId, task, projectStatus }) {
               ></EditInput>
             ) : (
               <div
-                className={`text-[12px] md:text-[16px] ${
+                className={`${isArchived ? "pl-3" : ""} text-[12px] md:text-[16px] ${
                   task.completed ? "line-through" : ""
                 } ${menuOpen ? "truncate" : ""}`}
               >
@@ -203,7 +214,8 @@ function Task({ projectId, task, projectStatus }) {
         </div>
 
         <button
-          className="cursor-pointer"
+          className={`cursor-pointer ${isArchived ? "hidden cursor-not-allowed" : ""}`}
+          disabled={isArchived}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();

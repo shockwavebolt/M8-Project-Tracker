@@ -33,11 +33,12 @@ function App() {
           gutter={12}
           containerStyle={{ margin: "8px" }}
           toastOptions={{
+            className: "toast",
             success: {
               duration: 3000,
               iconTheme: {
-                primary: "var(--color-green00)", // the check color
-                secondary: "var(--color-white00)", // the circle background
+                primary: "var(--color-toast-icon)", // the check color
+                secondary: "var(--color-toast-icon-bg)", // the circle background
               },
             },
             error: {
@@ -48,8 +49,8 @@ function App() {
               maxWidth: "90vw",
               width: "fit-content",
               padding: "1rem 1.5rem",
-              backgroundColor: "var(--color-black00)",
-              color: "var(--color-white00)",
+              backgroundColor: "var(--color-toast-bg)",
+              color: "var(--color-toast-text)",
             },
           }}
         />

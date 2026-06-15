@@ -122,14 +122,14 @@ function ProjectProvider({ children }) {
 
   function addNewProject(newProject) {
     setProjects((prevProjects) => [newProject, ...prevProjects]);
-    toast.success("New Project Added");
+    toast.success("Project Added");
   }
 
   function deleteProject(projectId) {
     setProjects((prevProjects) =>
       prevProjects.filter((project) => projectId != project.id),
     );
-    toast.success("Project successfully deleted");
+    toast.success("Projectdeleted");
   }
 
   function addTask(projectId, newTask) {
@@ -141,13 +141,14 @@ function ProjectProvider({ children }) {
             ...project,
             tasks: updatedTasks,
             progress: calculateProgress({ ...project, tasks: updatedTasks }),
-            status: project.status === "Not Started" ? "Paused" : project.status,
+            status:
+              project.status === "Not Started" ? "Paused" : project.status,
           };
         }
         return project;
       }),
     );
-    toast.success("New Task Added");
+    toast.success("Task Added");
   }
 
   function toggleTask(projectId, taskId) {
@@ -163,18 +164,27 @@ function ProjectProvider({ children }) {
             ...task,
             completed: completing,
             ...(completing && task.isRunning
-              ? { isRunning: false, elapsed: task.elapsed + (now - task.lastStart), lastStart: null }
+              ? {
+                  isRunning: false,
+                  elapsed: task.elapsed + (now - task.lastStart),
+                  lastStart: null,
+                }
               : {}),
           };
         });
 
-        const anyRunning = updatedTasks.some((t) => !t.completed && t.isRunning);
+        const anyRunning = updatedTasks.some(
+          (t) => !t.completed && t.isRunning,
+        );
 
         return {
           ...project,
           tasks: updatedTasks,
           progress: calculateProgress({ ...project, tasks: updatedTasks }),
-          status: !anyRunning && project.status === "Active" ? "Paused" : project.status,
+          status:
+            !anyRunning && project.status === "Active"
+              ? "Paused"
+              : project.status,
         };
       }),
     );
@@ -192,7 +202,7 @@ function ProjectProvider({ children }) {
         };
       }),
     );
-    toast.success("Task successfully deleted");
+    toast.success("Task deleted");
   }
 
   function editTask(projectId, taskId, newTitle) {
@@ -218,7 +228,7 @@ function ProjectProvider({ children }) {
     );
     newStatus === "Archived" ? toast.success("Project archived") : "";
 
-    newStatus === "Active" ? toast.success("Project pulled") : "";
+    newStatus === "Paused" ? toast.success("Project pulled") : "";
   }
 
   function formatTime(ms) {
@@ -315,11 +325,16 @@ function ProjectProvider({ children }) {
             : task,
         );
 
-        const anyRunning = updatedTasks.some((t) => !t.completed && t.isRunning);
+        const anyRunning = updatedTasks.some(
+          (t) => !t.completed && t.isRunning,
+        );
 
         return {
           ...project,
-          status: !anyRunning && project.status === "Active" ? "Paused" : project.status,
+          status:
+            !anyRunning && project.status === "Active"
+              ? "Paused"
+              : project.status,
           tasks: updatedTasks,
         };
       }),
@@ -339,7 +354,11 @@ function ProjectProvider({ children }) {
           tasks: project.tasks.map((t) => {
             if (t.isRunning && t.lastStart) {
               const now = Date.now();
-              return { ...t, elapsed: t.elapsed + (now - t.lastStart), lastStart: now };
+              return {
+                ...t,
+                elapsed: t.elapsed + (now - t.lastStart),
+                lastStart: now,
+              };
             }
             return t;
           }),

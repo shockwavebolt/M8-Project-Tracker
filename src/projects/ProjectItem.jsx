@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import StyledDotMenu, { MenuContent } from "../UI/dotMenu";
 import { Link, useLocation } from "react-router-dom";
 import { useProject } from "./ProjectContext";
-import { HiArchiveBoxArrowDown } from "react-icons/hi2";
+import { RiArchive2Fill, RiInboxUnarchiveFill } from "react-icons/ri";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -175,7 +175,7 @@ function ProjectItem({ item, linkUrl }) {
               className="cursor-pointer"
               onClick={() => updateStatus(item.id, "Archived")}
             >
-              <HiArchiveBoxArrowDown size={16} />
+              <RiArchive2Fill />
             </div>
           )}
 
@@ -184,7 +184,7 @@ function ProjectItem({ item, linkUrl }) {
               className="cursor-pointer"
               onClick={() => updateStatus(item.id, "Paused")}
             >
-              Pull
+              <RiInboxUnarchiveFill />
             </div>
           )}
 

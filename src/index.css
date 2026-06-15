@@ -31,6 +31,7 @@
   --color-red00: #f71735;
   --color-orange00: #e55812;
   --color-highlight: #fff;
+  --color-lavgrey: #9197ae;
 
   --shadow-md: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   --shadow-gld: 0 4px 4px 0 rgba(221, 164, 72, 0.5);
@@ -44,6 +45,7 @@
   --color-green01: #00a878;
   --color-orange01: #cb793a;
   --color-white01: #faf9f0;
+  --color-grey: #a3c4bc;
 
   /* Theme-aware bar color (used in ProgressionBar) */
   --color-bar: var(--color-black00);
@@ -52,7 +54,13 @@
   --shadow-focus: 0 4px 4px 0 rgba(221, 164, 72, 0.5);
 
   --color-pulled: var(--color-black00);
-  --color-archived: var(--color-black00);
+  --color-archived: var(--color-lavgrey);
+
+  /* Toast */
+  --color-toast-bg: var(--color-black00);
+  --color-toast-text: var(--color-white00);
+  --color-toast-icon: var(--color-green00);
+  --color-toast-icon-bg: var(--color-white00);
 }
 
 [data-theme="midnight"] {
@@ -62,7 +70,13 @@
   --color-bar: var(--color-teal);
   --color-text-muted: var(--color-white01);
   --color-pulled: var(--color-teal);
-  --color-archived: var(--color-teal);
+  --color-archived: var(--color-grey);
   --color-status-completed: var(--color-teal);
   --color-elevated: var(--color-teal);
+
+  /* Toast */
+  --color-toast-bg: var(--color-black03);
+  --color-toast-text: var(--color-white01);
+  --color-toast-icon: var(--color-green01);
+  --color-toast-icon-bg: var(--color-white01);
 }

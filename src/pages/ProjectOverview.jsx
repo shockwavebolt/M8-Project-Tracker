@@ -81,25 +81,46 @@ function ProjectOverview() {
           </TextSection>
 
           {/* TASKS */}
-          <TextSection className="flex flex-col items-start self-stretch gap-2 mt-3 pt-3 border-t border-(--color-elevated)">
-            <div className="font-(family-name:--font-01) text-black00 text-[16px] md:text-[18px]">
-              Tasks :
-            </div>
-            <ul className="flex flex-col items-start self-stretch gap-4 ">
-              {project.tasks
-                .slice()
-                .sort((a, b) => a.completed - b.completed)
-                .map((task) => (
-                  <Task
-                    key={task.id}
-                    projectId={project.id}
-                    task={task}
-                    projectStatus={project.status}
-                  />
-                ))}
+          <TextSection className="flex flex-col items-start self-stretch gap-8 mt-3 pt-3 border-t border-(--color-elevated)">
+            <div className="flex flex-col items-start self-stretch gap-2">
+              <div className="font-(family-name:--font-01) text-black00 text-[16px] md:text-[18px]">
+                Tasks :
+              </div>
+              <ul className="flex flex-col items-start self-stretch gap-4 ">
+                {project.tasks
+                  .filter((task) => !task.completed)
+                  .map((task) => (
+                    <Task
+                      key={task.id}
+                      projectId={project.id}
+                      task={task}
+                      projectStatus={project.status}
+                    />
+                  ))}
 
-              <TasksInput projectId={project.id} />
-            </ul>
+                {project.status !== "Archived" && (
+                  <TasksInput projectId={project.id} />
+                )}
+              </ul>
+            </div>
+
+            <div className="flex flex-col items-start self-stretch gap-2">
+              <div className="font-(family-name:--font-01) text-black00 text-[16px] md:text-[18px]">
+                Completed Tasks :
+              </div>
+              <ul className="flex flex-col items-start self-stretch gap-4 ">
+                {project.tasks
+                  .filter((task) => task.completed)
+                  .map((task) => (
+                    <Task
+                      key={task.id}
+                      projectId={project.id}
+                      task={task}
+                      projectStatus={project.status}
+                    />
+                  ))}
+              </ul>
+            </div>
           </TextSection>
 
           <TextSection className="flex flex-col items-start gap-2 self-stretch mt-3 pt-3 border-t border-(--color-black00)">

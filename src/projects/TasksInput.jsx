@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../UI/Button";
 import { HiPlus } from "react-icons/hi";
 import { useProject } from "./ProjectContext";
@@ -80,6 +80,11 @@ function TasksInput({ projectId }) {
   const [task, setTask] = useState("");
   const [isAddingTask, setAddingTask] = useState(false);
   const { addTask } = useProject();
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isAddingTask) inputRef.current?.focus();
+  }, [isAddingTask]);
 
   function handleAddClick() {
     setAddingTask(true);
@@ -114,7 +119,11 @@ function TasksInput({ projectId }) {
       ) : (
         <div className="flex items-center gap-2 w-full ">
           <InputWrapper>
-            <TaskInput value={task} onChange={(e) => setTask(e.target.value)} />
+            <TaskInput
+              ref={inputRef}
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+            />
           </InputWrapper>
           <span className=" hidden md:flex gap-2">
             <Button variation="primary" onClick={handleCancelClick}>

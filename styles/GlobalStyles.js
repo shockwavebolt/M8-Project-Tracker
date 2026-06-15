@@ -43,8 +43,15 @@ color: var(--color-black00);
   }
 
 button{
-  
+
 }
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    .toast {
+      font-size: 12px !important;
+      padding: 0.75rem 1rem !important;
+    }
+  }
 
 
 `;

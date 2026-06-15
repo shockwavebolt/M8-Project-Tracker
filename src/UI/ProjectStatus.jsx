@@ -73,7 +73,7 @@ function ProjectStatus({ projectId, status, progress }) {
             : curStatus === "Completed"
               ? "text-(--color-status-completed)"
               : curStatus === "Archived"
-                ? "text-(--color-archived) opacity-50"
+                ? "text-(--color-archived)"
                 : ""
       }`}
     >
